@@ -146,3 +146,5 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+AUTH_USER_MODEL="app.CustomUser"
+AUTHENTICATION_BACKENDS=['app.EmailBackEnd.EmailBackEnd']
