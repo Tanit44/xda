@@ -31,3 +31,7 @@ def doLogin(request):
     else:
       # messages.error(request, 'Invalid Login Details')
       return HttpResponseRedirect('/')
+
+def logout_user(request):
+  logout(request)
+  return HttpResponseRedirect('/')
