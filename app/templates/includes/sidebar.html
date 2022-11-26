@@ -3,47 +3,106 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{% static 'images/11.png' %}" height="50" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">John Doe</p>
+          <p class="app-sidebar__user-name" style="text-transform:capitalize">{{ user.username }}</p>
           <p class="app-sidebar__user-designation">Frontend Developer</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
-            <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
-            <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
-            <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
-          </ul>
-        </li>
-        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
-            <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
-            <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-            <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
-          </ul>
-        </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
-            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
-          </ul>
-        </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a></li>
-            <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
-            <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
-            <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
-            <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
-            <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
-            <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>
-          </ul>
-        </li>
-        <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Docs</span></a></li>
+        {% if user.user_type == 'Admin' %}
+          {% url 'admin_home' as ah %}
+          <li>
+            <a href="{{ ah }}" class="app-menu__item 
+            {% if request.path == ah  %} active {% endif %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label"> Admin Dashboard</span></a></li>
+          {% url 'add_user_type' as aut %}
+          <li>
+            <a href="{{ aut }}" class="app-menu__item 
+            {% if request.path == aut  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> User Type List</span></a></li>
+          {% url 'add_staff' as as %}
+          <li>
+            <a href="{{ as }}" class="app-menu__item 
+            {% if request.path == as  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Staff List</span></a></li>
+          {% url 'add_gender' as ag %}
+          <li>
+            <a href="{{ ag }}" class="app-menu__item 
+            {% if request.path == ag  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Gender List</span></a></li>
+          {% url 'add_level' as al %}
+          <li>
+            <a href="{{ al }}" class="app-menu__item 
+            {% if request.path == al  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Level List</span></a></li>
+          {% url 'add_pro' as ap %}
+          <li>
+            <a href="{{ ap }}" class="app-menu__item 
+            {% if request.path == ap  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Pro List</span></a></li>
+          {% url 'add_edu' as ae %}
+          <li>
+            <a href="{{ ae }}" class="app-menu__item 
+            {% if request.path == ae  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Edu List</span></a></li>
+          {% url 'add_career' as ac %}
+          <li>
+            <a href="{{ ac }}" class="app-menu__item 
+            {% if request.path == ac  %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> Career List</span></a></li>
+          {% url 'tableall' as ta %}
+          <li>
+            <a href="{{ ta }}" class="app-menu__item 
+            {% if request.path == ta  %} active {% endif %}"><i class="app-menu__icon fa fa-align-justify"></i><span class="app-menu__label"> TableAll</span></a></li>
+        {% elif user.user_type == 'Bkk1' %}
+          {% url 'bkk1_home' as b1h %}
+          <li>
+            <a href="{{ b1h }}" class="app-menu__item 
+            {% if request.path == b1h %} active {% endif %}" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label"> Bkk1 Dashboard</span></a></li>
+          {% url 'bkk1' as b1 %}
+          <li>
+            <a href="{{ b1 }}" class="app-menu__item 
+            {% if request.path == b1 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> กลุ่ม กทม</span></a></li>
+          {% url 'bkk101' as b101 %}
+          <li>
+            <a href="{{ b101 }}" class="app-menu__item 
+            {% if request.path == b101 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> หมิงซิน</span></a></li>
+          {% url 'bkk102' as b102 %}
+          <li>
+            <a href="{{ b102 }}" class="app-menu__item 
+            {% if request.path == b102 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> หมิงฮุย</span></a></li>
+          {% url 'bkk103' as b103 %}
+          <li>
+            <a href="{{ b103 }}" class="app-menu__item 
+            {% if request.path == b103 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> ฉือเฉิง</span></a></li>
+        {% elif user.user_type == 'Skw1' %}
+          {% url 'skw1_home' as s1h %}
+          <li>
+            <a href="{{ s1h }}" class="app-menu__item 
+            {% if request.path == s1h %} active {% endif %}" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label"> Skw1 Dashboard</span></a></li>
+          {% url 'skw1' as s1 %}
+          <li>
+            <a href="{{ s1 }}" class="app-menu__item 
+            {% if request.path == s1 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> กลุ่ม กบินทร์บุรี</span></a></li>
+          {% url 'skw101' as s101 %}
+          <li>
+            <a href="{{ s101 }}" class="app-menu__item 
+            {% if request.path == s101 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> ฝ่าเซิ่ง</span></a></li>
+          {% url 'skw102' as s102 %}
+          <li>
+            <a href="{{ s102 }}" class="app-menu__item 
+            {% if request.path == s102 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> ฉืออี</span></a></li>
+          {% url 'skw103' as s103 %}
+          <li>
+            <a href="{{ s103 }}" class="app-menu__item 
+            {% if request.path == s103 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> ฉือจิ้ง</span></a></li>     
+        {% elif user.user_type == 'Skw3' %}
+          {% url 'skw3_home' as s3h %}
+          <li>
+            <a href="{{ s3h }}" class="app-menu__item 
+            {% if request.path == s3h %} active {% endif %}" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label"> Skw3 Dashboard</span></a></li>
+          {% url 'skw3' as s3 %}
+          <li>
+            <a href="{{ s3 }}" class="app-menu__item 
+            {% if request.path == s3 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> กลุ่ม อรัญประเทศ</span></a></li>
+          {% url 'skw301' as s301 %}
+          <li>
+            <a href="{{ s301 }}" class="app-menu__item 
+            {% if request.path == s301 %} active {% endif %}"><i class="app-menu__icon fa fa-id-card"></i><span class="app-menu__label"> ซิ่นเต๋อ</span></a></li>
+                  
+        {% else %}
+
+        {% endif %}
       </ul>
     </aside>

@@ -1,4 +1,5 @@
 {% extends 'layouts/base_all.html' %}
+{% load humanize %}
 
 {% block title %} Admin_home | {% endblock title %}
 
@@ -13,6 +14,86 @@
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
       <li class="breadcrumb-item"><a href="#">ระบบกลาง</a></li>
     </ul>
+  </div>
+  <h3>จำนวน บุคลากร</h3>
+  <div class="row">    
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
+        <div class="info">
+          <h4>ทั้งหมด</h4>
+          <p><b>{{ total_all|intcomma }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small warning coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
+        <div class="info">
+          <h4>สระแก้ว</h4>
+          
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small danger coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
+        <div class="info">
+          <h4>โคราช</h4>
+          
+        </div>
+      </div>    
+    </div>
+  </div>  
+  <h3>ชั้นศึกษา</h3>
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>3 วัน</h4>
+          
+        </div>
+      </div>    
+    </div>  
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>หมิงเต๋อ</h4>
+          
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small warning coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>ซินหมิน</h4>
+          
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small danger coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>จื่อซั่น</h4>
+          
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>เจี่ยงเอวี๋ยน</h4>
+          
+        </div>
+      </div>    
+    </div>  
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>เจี่ยงซือ</h4>
+          
+        </div>
+      </div>    
+    </div>
   </div>
 </main>
 
