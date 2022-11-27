@@ -9,7 +9,10 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
+    {% block custom_css %}
+
+    {% endblock custom_css %}
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
@@ -18,14 +21,9 @@
     <!-- Sidebar menu-->
     {% include 'includes/sidebar.html' %}
     
-    
-    <!-- {% include 'includes/main.html' %} -->
     {% block main_content %}
 
     {% endblock main_content %}
-    
-
-    
     <!-- Essential javascripts for application to work-->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -34,7 +32,10 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="{% static 'js/plugins/pace.min.js' %}"></script>
     <!-- Page specific javascripts-->
-    <!-- <script type="text/javascript" src="js/plugins/chart.js"></script> -->
-    
+    <!-- <script type="text/javascript" src="{% static 'js/plugins/chart.js' %}"></script> -->
+  
+    {% block custom_js %}
+
+    {% endblock custom_js %}
   </body>
 </html>

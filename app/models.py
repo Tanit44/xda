@@ -5,6 +5,11 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     user_type = models.CharField(default = 'Admin', max_length = 100)
 
+class UserType(models.Model):
+    name = models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.name
     
 class TableAll(models.Model):
     nId_person = models.CharField(verbose_name='รหัส', max_length=100)
