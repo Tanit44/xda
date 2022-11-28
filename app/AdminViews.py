@@ -2,6 +2,10 @@ from django.shortcuts import render,redirect
 from app.models import *
 from app.forms import *
 
+from django.views import generic
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.db.models import Q
+
 def admin_home(request):
   total_all = TableAll.objects.count()
   total_bkk1 = Bkk1.objects.count()
@@ -241,3 +245,52 @@ def delete_career(request, id):
     allcareer = Career.objects.get(id = id)
     allcareer.delete()
     return redirect('/add_career/')
+
+class TableAllsJsonView(BaseDatatableView):
+    # Model specification
+    model = TableAll
+    # Field specification
+    columns = ['id', 'nId_person', 'cGender', 'cFname', 'nAge', 'cRoom', 'dDate', 'cPro', 'cRec', 'cSup']
+
+    # Specify search method: Partial match
+    # def get_filter_method(self):
+    #     return super().FILTER_ICONTAINS
+
+    def filter_queryset(self, qs):
+            # use parameters passed in GET request to filter queryset
+
+            # simple example:
+        search = self.request.GET.get('search[value]', None)
+        if search:
+            qs = qs.filter(
+                Q(cFname__istartswith=search) |
+                Q(nId_person__istartswith=search)
+            )
+        return qs
+
+# Base class for printing / Excel / CSV output
+class BaseReportView(generic.ListView):
+    model = TableAll
+
+    # Get selected data
+    def get_queryset(self):
+        id_list = self.request.GET['id_list'].split('_')
+        result = TableAll.objects.filter(id__in = id_list)
+        return result
+
+
+# Print screen display
+class PrintView(BaseReportView):
+    template_name = 'admin/print.html'
+
+def tableall_form(request, id = 0):    
+    tableall = TableAll.objects.get(id = id)
+    dDate = tableall.dDate
+    s_cbDd = tableall.cbDd # cbDd for check-box
+    form = TableAllForm(instance = tableall)
+    context = {
+        'dDate' : dDate,
+        'form': form,
+        's_cbDd' : s_cbDd, # cbDd for check-box
+    }
+    return render(request, "layouts/tableall_form.html", context)

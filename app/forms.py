@@ -71,3 +71,13 @@ class AddCareerForm(forms.ModelForm):
         super(AddCareerForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
+class TableAllForm(forms.ModelForm):
+    class Meta:
+        model = TableAll
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(TableAllForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'

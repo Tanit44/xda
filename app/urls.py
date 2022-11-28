@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views, AdminViews 
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     # Admin
     path('', views.ShowLoginPage, name='show_login'),
     path('doLogin', views.doLogin,name="do_login"),
     path('logout_user', views.logout_user,name="logout"),
-    path('admin_home', AdminViews.admin_home,name="admin_home"),    
+   
     path("add_user_type/", AdminViews.add_user_type, name="add_user_type"), # เพิ่ม กลุ่มประเภทผู้ใช้งาน
     path("edit_user_type/<int:id>/", AdminViews.add_user_type, name="edit_user_type"),# แก้ไข กลุ่มประเภทผู้ใช้งาน
     path("delete_user_type/<int:id>/", AdminViews.delete_user_type, name="delete_user_type"),# ลบ กลุ่มประเภทผู้ใช้งาน
@@ -28,5 +29,12 @@ urlpatterns = [
     path("add_career/", AdminViews.add_career, name="add_career"), # เพิ่ม อาชีพ
     path("edit_career/<int:id>/", AdminViews.add_career, name="edit_career"),# แก้ไข อาชีพ
     path("delete_career/<int:id>/", AdminViews.delete_career, name="delete_career"),# ลบ อาชีพ
+    # Server-Side admin (view only)
+    path('admin_home', AdminViews.admin_home,name="admin_home"), 
+    path('tableall', TemplateView.as_view(template_name='layouts/table_all.html'), name='tableall'), # ใช้คู่กับบรรทัดล่าง Server Side for first display
+    path('tablealls', AdminViews.TableAllsJsonView.as_view(), name='TableAllsJson'), # use in scripts ใช้คู่กับบรรทัดบน
+    path('print', AdminViews.PrintView.as_view(), name='print'),    
+    path('tableall_form', AdminViews.tableall_form,name="tableall_form"),
+    path('tableall/<int:id>', AdminViews.tableall_form,name="tableall_view"),  
  
 ]
