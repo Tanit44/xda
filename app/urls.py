@@ -16,5 +16,8 @@ urlpatterns = [
     path("add_gender/", AdminViews.add_gender, name="add_gender"), # เพิ่ม เพศ
     path("edit_gender/<int:id>/", AdminViews.add_gender, name="edit_gender"),# แก้ไข เพศ
     path("delete_gender/<int:id>/", AdminViews.delete_gender, name="delete_gender"),# ลบ เพศ
+    path("add_level/", AdminViews.add_level, name="add_level"), # เพิ่ม ธรรมวุฒิ
+    path("edit_level/<int:id>/", AdminViews.add_level, name="edit_level"),# แก้ไข ธรรมวุฒิ
+    path("delete_level/<int:id>/", AdminViews.delete_level, name="delete_level"),# ลบ ธรรมวุฒิ
 
 ]

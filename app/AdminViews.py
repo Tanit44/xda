@@ -123,3 +123,32 @@ def delete_gender(request, id):
   allgender = Gender.objects.get(id = id)
   allgender.delete()
   return redirect('/add_gender/')
+
+# สำหรับ เพิ่ม/แก้ไข/ลบ ธรรมวุฒิ
+def add_level(request, id = 0):
+  levelall = Level.objects.all()
+  if request.method == 'GET':
+    if id == 0:
+      form = AddLevelForm()
+    else:
+      alllevel = Level.objects.get(id = id)
+      form = AddLevelForm(instance = alllevel)
+    context = {
+      'queryset': levelall,
+      'form': form
+    }
+    return render(request, 'admin/add_level.html', context)
+  else:
+    if id == 0:
+      form = AddLevelForm(request.POST)
+    else:
+      alllevel = Level.objects.get(id = id)
+      form = AddLevelForm(request.POST, instance = alllevel)
+    if form.is_valid():
+      form.save()
+    return redirect('/add_level/')
+
+def delete_level(request, id):
+  alllevel = Level.objects.get(id = id)
+  alllevel.delete()
+  return redirect('/add_level/')
