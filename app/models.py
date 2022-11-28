@@ -28,6 +28,12 @@ class Pro(models.Model):
 
     def __str__(self):
         return self.pname
+
+class Edu(models.Model):
+    ename = models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.ename
     
 class TableAll(models.Model):
     nId_person = models.CharField(verbose_name='รหัส', max_length=100)

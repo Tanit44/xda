@@ -181,3 +181,33 @@ def delete_pro(request, id):
   allpro = Pro.objects.get(id = id)
   allpro.delete()
   return redirect('/add_pro/')
+    
+# สำหรับ เพิ่ม/แก้ไข/ลบ การศึกษา
+def add_edu(request, id = 0):
+    eduall = Edu.objects.all() 
+    if request.method == "GET":
+        if id == 0:
+            form = AddEduForm()
+        else:
+            alledu = Edu.objects.get(id = id)
+            form = AddEduForm(instance = alledu)
+
+        context = {
+                'queryset': eduall,
+                "form": form
+            }
+        return render(request, "admin/add_edu.html", context)
+    else:
+        if id == 0:
+            form = AddEduForm(request.POST)
+        else:
+            alledu = Edu.objects.get(id = id)
+            form = AddEduForm(request.POST, instance = alledu)
+        if form.is_valid():
+            form.save()
+        return redirect('/add_edu/')
+
+def delete_edu(request, id):
+    alledu = Edu.objects.get(id = id)
+    alledu.delete()
+    return redirect('/add_edu/')

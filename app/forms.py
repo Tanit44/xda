@@ -51,3 +51,13 @@ class AddProForm(forms.ModelForm):
         for visible in self.visible_fields():
 
             visible.field.widget.attrs['class'] = 'form-control'
+
+class AddEduForm(forms.ModelForm):
+    class Meta:
+        model = Edu
+        fields = ('id', 'ename')
+
+    def __init__(self, *args, **kwargs):
+        super(AddEduForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'

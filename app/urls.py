@@ -22,5 +22,8 @@ urlpatterns = [
     path("add_pro/", AdminViews.add_pro, name="add_pro"), # เพิ่ม อ.ถ่ายทอดเบิกธรรม
     path("edit_pro/<int:id>/", AdminViews.add_pro, name="edit_pro"),# แก้ไข อ.ถ่ายทอดเบิกธรรม
     path("delete_pro/<int:id>/", AdminViews.delete_pro, name="delete_pro"),# ลบ อ.ถ่ายทอดเบิกธรรม
+    path("add_edu/", AdminViews.add_edu, name="add_edu"), # เพิ่ม การศึกษา
+    path("edit_edu/<int:id>/", AdminViews.add_edu, name="edit_edu"),# แก้ไข การศึกษา
+    path("delete_edu/<int:id>/", AdminViews.delete_edu, name="delete_edu"),# ลบ การศึกษา
 
 ]
