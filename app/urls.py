@@ -19,5 +19,8 @@ urlpatterns = [
     path("add_level/", AdminViews.add_level, name="add_level"), # เพิ่ม ธรรมวุฒิ
     path("edit_level/<int:id>/", AdminViews.add_level, name="edit_level"),# แก้ไข ธรรมวุฒิ
     path("delete_level/<int:id>/", AdminViews.delete_level, name="delete_level"),# ลบ ธรรมวุฒิ
+    path("add_pro/", AdminViews.add_pro, name="add_pro"), # เพิ่ม อ.ถ่ายทอดเบิกธรรม
+    path("edit_pro/<int:id>/", AdminViews.add_pro, name="edit_pro"),# แก้ไข อ.ถ่ายทอดเบิกธรรม
+    path("delete_pro/<int:id>/", AdminViews.delete_pro, name="delete_pro"),# ลบ อ.ถ่ายทอดเบิกธรรม
 
 ]

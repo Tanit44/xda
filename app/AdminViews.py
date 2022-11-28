@@ -152,3 +152,32 @@ def delete_level(request, id):
   alllevel = Level.objects.get(id = id)
   alllevel.delete()
   return redirect('/add_level/')
+
+# สำหรับ เพิ่ม/แก้ไข/ลบ อ.ถ่ายทอดเบิกธรรม
+def add_pro(request, id = 0):
+  proall = Pro.objects.all()
+  if request.method == 'GET':
+    if id == 0:
+      form = AddProForm()
+    else:
+      allpro = Pro.objects.get(id = id)
+      form = AddProForm(instance = allpro)
+    context = {
+      'queryset': proall,
+      'form': form
+    }
+    return render(request, 'admin/add_pro.html', context)
+  else:
+    if id == 0:
+      form = AddProForm(request.POST)
+    else:
+      allpro = Pro.objects.get(id = id)
+      form = AddProForm(request.POST, instance = allpro)
+    if form.is_valid():
+      form.save()
+    return redirect('/add_pro/')
+
+def delete_pro(request, id):
+  allpro = Pro.objects.get(id = id)
+  allpro.delete()
+  return redirect('/add_pro/')

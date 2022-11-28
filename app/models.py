@@ -22,6 +22,12 @@ class Level(models.Model):
 
     def __str__(self):
         return self.lname
+
+class Pro(models.Model):
+    pname = models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.pname
     
 class TableAll(models.Model):
     nId_person = models.CharField(verbose_name='รหัส', max_length=100)

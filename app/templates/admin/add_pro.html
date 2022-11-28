@@ -1,0 +1,137 @@
+{% extends 'layouts/base_all.html' %}
+{% load static %}
+
+{% block title %} Admin_pro | {% endblock title %}
+
+{% block custom_css %}
+<!-- third party css -->
+<link href="{% static 'datatables/dataTables.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'datatables/responsive.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'datatables/buttons.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'datatables/select.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+
+{% endblock custom_css %}
+
+{% block main_content %}
+<main class="app-content">
+  <div class="app-title">
+    <div class="col-md-12">
+      <div class="float-right mt-1">
+        <a href="{% url 'admin_home' %}"><i class="fa fa-close" style="font-size: 18px;"></i></a>
+      </div>
+      <h4><i class="fa fa-edit"></i> แบบ เพิ่ม/แก้ไข/ลบ อ.ถ่ายทอดเบิกธรรม</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="tile">
+        <form action="" method="post" autocomplete="off" novalidate>
+          {% csrf_token %}
+          <h3 class="tile-title">กรอก อ.ถ่ายทอดเบิกธรรม</h3>
+          <div class="tile-body">
+            <div class="form-group">
+              <label class="control-label">อ.ถ่ายทอดเบิกธรรม</label>
+              {{ form.pname }}
+            </div>
+          </div>
+          <div class="tile-footer">
+            <div class="form-row">
+              <div class="col-md-6 text-left">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+              </div>
+              <div class="col-md-6 text-right">
+                <a href="{% url 'add_pro' %}" class="btn btn-secondary"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancle</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="tile">
+        <h3 class="tile-title">รายชื่อ อ.ถ่ายทอดเบิกธรรม</h3>
+        <div class="table-responsive">
+          <table id="example" class="table table-striped table-bordered second" style="width:100%">
+            <thead>
+              <tr>
+                <th style="font-size: 18px;">ลำดับ</th>
+                <th style="font-size: 18px;">อ.ถ่ายทอดเบิกธรรม</th>
+                <th style="font-size: 18px;">เครื่องมือ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for qs in queryset %}
+              <tr>
+                <td style="padding-top:18px; font-size: 16px;">{{ qs.id }}</td>
+                <td style="padding-top:18px; font-size: 16px;">{{ qs.pname }}</td>
+                <td>
+                  <a href="{% url 'edit_pro' qs.id %}" class="btn">
+                    <i class="fa fa-edit fa-lg text-info" style="font-size: 18px;"></i>
+                  </a>
+                  <form action="{% url 'delete_pro' qs.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                      <i class="fa fa-trash fa-lg text-danger" style="font-size: 18px;"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock main_content %}
+
+{% block custom_js %}
+<!-- third party js -->
+<script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'datatables/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'datatables/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables/buttons.html5.min.js' %}"></script>
+<script src="{% static 'datatables/buttons.flash.min.js' %}"></script>
+<script src="{% static 'datatables/buttons.print.min.js' %}"></script>
+<script src="{% static 'datatables/jszip.min.js' %}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+      var table = $('#example').DataTable( {
+          lengthChange: false,
+          order: [[0, "desc"]], // เรียง คอลัมน์ที่ 3 น้อย ไป มาก
+          lengthMenu: [[5, 10, 50, 100, -1], [5, 10, 50, 100, "All"]],
+          pageLength: 5,
+          // columnDefs: [
+            // { className: 'text-right', targets: [0, 1] },
+            // { className: 'text-center', targets: [2] },
+          // ],
+          buttons: [                 
+            { // กำหนดพิเศษเฉพาะปุ่ม excel
+            extend: 'excel',
+            className: 'btn btn-success rounded-0',
+            text: '<i class="fa fa-file-excel-o"></i> Excel', 
+            exportOptions: {
+                columns: [ 0, 1 ] // เอาคอลัมน์ที่ 3 (เครื่องมือ) ออก
+              },
+            }, // สิ้นสุดกำหนดพิเศษปุ่ม excel 
+            { // กำหนดพิเศษเฉพาะปุ่ม print
+            extend: 'print',               
+            className: 'btn btn-warning rounded-0',
+            text: '<i class="fa fa-print"></i> Print', // ข้อความที่แสดง
+            exportOptions: {
+                columns: [ 0, 1 ] // เอาคอลัมน์ที่ 3 (เครื่องมือ) ออก
+              },
+            }, // สิ้นสุดกำหนดพิเศษปุ่ม print
+            'pageLength'], // กำหนดจำนวนหน้าที่ ให้แสดง 
+      } );
+      table.buttons().container()
+          .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+  });
+</script>
+
+
+{% endblock custom_js %}

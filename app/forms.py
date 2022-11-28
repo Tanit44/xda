@@ -40,3 +40,14 @@ class AddLevelForm(forms.ModelForm):
         super(AddLevelForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
+class AddProForm(forms.ModelForm):
+    class Meta:
+        model = Pro
+        fields = ('id', 'pname')
+
+    def __init__(self, *args, **kwargs):
+        super(AddProForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+
+            visible.field.widget.attrs['class'] = 'form-control'
