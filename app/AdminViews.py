@@ -41,3 +41,56 @@ def delete_user_type(request, id):
     alltype = UserType.objects.get(id = id)
     alltype.delete()
     return redirect("/add_user_type/")
+
+# สำหรับ เพิ่ม/แก้ไข/ลบ ทีมงาน
+def add_staff(request, id = 0):
+  userall = CustomUser.objects.all().order_by('-id') # เรียงจาก หลัง ไป หน้า
+  allusertype = UserType.objects.all()
+  if request.method == 'GET':
+    if id == 0:
+      form = AddStaffForm()
+      context = {
+        'queryset': userall, # show in datatable
+        'usertypeall': allusertype, # show in select
+        'form': form
+      }
+      # return render(request, 'admin/add_staff.html', context)
+    else: # Edit
+      alluser = CustomUser.objects.get(id = id)
+      form = AddStaffForm(instance = alluser)
+      a_user_t = alluser.user_type # select user_type for ref
+      context = {
+        'queryset': userall, # show in datatable
+        'usertypeall': allusertype, # show in select
+        'ausert': a_user_t, # show in selected
+        'form': form
+      }
+    return render(request, 'admin/add_staff.html', context)
+  else:
+    if id == 0:
+      form = AddStaffForm(request.POST)
+      if form.is_valid():
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        user_type = request.POST.get('user_type')
+        form = CustomUser.objects.create_user(
+          username = username,
+          password = password,
+          email = email,
+          user_type = user_type,
+        )
+        form.save()
+    else:
+      alluser = CustomUser.objects.get(id = id)
+      form = AddStaffForm(request.POST, instance = alluser)
+      if form.is_valid():
+        user = form.save()
+        user.set_password(user.password)
+        user.save()
+    return redirect('/add_staff/')
+
+def delete_staff(request, id):
+  alluser = CustomUser.objects.get(id = id)
+  alluser.delete()
+  return redirect('/add_staff/')
