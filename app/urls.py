@@ -25,5 +25,8 @@ urlpatterns = [
     path("add_edu/", AdminViews.add_edu, name="add_edu"), # เพิ่ม การศึกษา
     path("edit_edu/<int:id>/", AdminViews.add_edu, name="edit_edu"),# แก้ไข การศึกษา
     path("delete_edu/<int:id>/", AdminViews.delete_edu, name="delete_edu"),# ลบ การศึกษา
-
+    path("add_career/", AdminViews.add_career, name="add_career"), # เพิ่ม อาชีพ
+    path("edit_career/<int:id>/", AdminViews.add_career, name="edit_career"),# แก้ไข อาชีพ
+    path("delete_career/<int:id>/", AdminViews.delete_career, name="delete_career"),# ลบ อาชีพ
+ 
 ]

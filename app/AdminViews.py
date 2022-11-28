@@ -211,3 +211,33 @@ def delete_edu(request, id):
     alledu = Edu.objects.get(id = id)
     alledu.delete()
     return redirect('/add_edu/')
+
+# สำหรับ เพิ่ม/แก้ไข/ลบ อาชีพ
+def add_career(request, id = 0):
+    careerall = Career.objects.all() 
+    if request.method == "GET":
+        if id == 0:
+            form = AddCareerForm()
+        else:
+            allcareer = Career.objects.get(id = id)
+            form = AddCareerForm(instance=allcareer)
+
+        context = {
+                'queryset': careerall,
+                "form": form
+            }
+        return render(request, "admin/add_career.html", context)
+    else:
+        if id == 0:
+            form = AddCareerForm(request.POST)
+        else:
+            allcareer = Career.objects.get(id = id)
+            form = AddCareerForm(request.POST, instance = allcareer)
+        if form.is_valid():
+            form.save()
+        return redirect('/add_career/')
+
+def delete_career(request, id):
+    allcareer = Career.objects.get(id = id)
+    allcareer.delete()
+    return redirect('/add_career/')

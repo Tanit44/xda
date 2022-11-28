@@ -34,6 +34,12 @@ class Edu(models.Model):
 
     def __str__(self):
         return self.ename
+
+class Career(models.Model):
+    cname = models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.cname
     
 class TableAll(models.Model):
     nId_person = models.CharField(verbose_name='รหัส', max_length=100)
