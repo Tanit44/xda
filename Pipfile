@@ -12,6 +12,7 @@ django-import-export = "*"
 djangorestframework = "*"
 django-datatables-view = "*"
 django-thaidate = "*"
+django-ninja = "==0.16.1"
 
 [dev-packages]
 

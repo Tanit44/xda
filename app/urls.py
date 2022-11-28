@@ -2,7 +2,11 @@ from django.urls import path
 from . import views, AdminViews 
 from django.views.generic.base import TemplateView
 
+from app.api import api
+
 urlpatterns = [
+    # ninjaAPI
+    path('api/', api.urls),
     # Admin
     path('', views.ShowLoginPage, name='show_login'),
     path('doLogin', views.doLogin,name="do_login"),
