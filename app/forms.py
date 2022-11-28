@@ -20,4 +20,13 @@ class AddStaffForm(forms.ModelForm):
         super(AddStaffForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
- 
+
+class AddGenderForm(forms.ModelForm):
+    class Meta:
+        model = Gender
+        fields = ('id', 'gname')
+
+    def __init__(self, *args, **kwargs):
+        super(AddGenderForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'

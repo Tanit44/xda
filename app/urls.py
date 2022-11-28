@@ -13,5 +13,8 @@ urlpatterns = [
     path("add_staff/", AdminViews.add_staff, name="add_staff"), # เพิ่ม ทีมงาน
     path("edit_staff/<int:id>/", AdminViews.add_staff, name="edit_staff"),# แก้ไข ทีมงาน
     path("delete_staff/<int:id>/", AdminViews.delete_staff, name="delete_staff"),# ลบ ทีมงาน
- 
+    path("add_gender/", AdminViews.add_gender, name="add_gender"), # เพิ่ม เพศ
+    path("edit_gender/<int:id>/", AdminViews.add_gender, name="edit_gender"),# แก้ไข เพศ
+    path("delete_gender/<int:id>/", AdminViews.delete_gender, name="delete_gender"),# ลบ เพศ
+
 ]

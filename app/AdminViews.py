@@ -94,3 +94,32 @@ def delete_staff(request, id):
   alluser = CustomUser.objects.get(id = id)
   alluser.delete()
   return redirect('/add_staff/')
+
+# สำหรับ เพิ่ม/แก้ไข/ลบ คำนำหน้าชื่อ
+def add_gender(request, id = 0):
+  genderall = Gender.objects.all()
+  if request.method == 'GET':
+    if id == 0:
+      form = AddGenderForm()
+    else:
+      allgender = Gender.objects.get(id = id)
+      form = AddGenderForm(instance = allgender)
+    context = {
+      'queryset': genderall,
+      'form': form
+    }
+    return render(request, 'admin/add_gender.html', context)
+  else:
+    if id == 0:
+      form = AddGenderForm(request.POST)
+    else:
+      allgender = Gender.objects.get(id = id)
+      form = AddGenderForm(request.POST, instance = allgender)
+    if form.is_valid():
+      form.save()
+    return redirect('/add_gender/')
+
+def delete_gender(request, id):
+  allgender = Gender.objects.get(id = id)
+  allgender.delete()
+  return redirect('/add_gender/')
