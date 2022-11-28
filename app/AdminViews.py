@@ -8,12 +8,12 @@ from django.db.models import Q
 
 def admin_home(request):
   total_all = TableAll.objects.count()
-  total_bkk1 = Bkk1.objects.count()
-  total_skw1 = Skw1.objects.count()
+  total_bkk = Bkk.objects.count()
+  total_skw = Skw.objects.count()
   context = {
-    'total_all': total_all,
-    'total_bkk1': total_bkk1,
-    'total_skw1': total_skw1,
+    'total_all': total_all, #ทั้งหมด
+    'total_bkk': total_bkk, #กทม
+    'total_skw': total_skw, #สระแก้ว
   }
   return render(request,"admin/admin_home.html", context)
 

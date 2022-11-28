@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, AdminViews 
+from . import views, AdminViews, Bkk1Views 
 from django.views.generic.base import TemplateView
 
 from app.api import api
@@ -10,8 +10,7 @@ urlpatterns = [
     # Admin
     path('', views.ShowLoginPage, name='show_login'),
     path('doLogin', views.doLogin,name="do_login"),
-    path('logout_user', views.logout_user,name="logout"),
-   
+    path('logout_user', views.logout_user,name="logout"),   
     path("add_user_type/", AdminViews.add_user_type, name="add_user_type"), # เพิ่ม กลุ่มประเภทผู้ใช้งาน
     path("edit_user_type/<int:id>/", AdminViews.add_user_type, name="edit_user_type"),# แก้ไข กลุ่มประเภทผู้ใช้งาน
     path("delete_user_type/<int:id>/", AdminViews.delete_user_type, name="delete_user_type"),# ลบ กลุ่มประเภทผู้ใช้งาน
@@ -40,5 +39,9 @@ urlpatterns = [
     path('print', AdminViews.PrintView.as_view(), name='print'),    
     path('tableall_form', AdminViews.tableall_form,name="tableall_form"),
     path('tableall/<int:id>', AdminViews.tableall_form,name="tableall_view"),  
- 
+    # Server-Side bkk1 (view only)
+    path('bkk1_home', Bkk1Views.bkk1_home, name="bkk1_home"),
+    path('bkk1', TemplateView.as_view(template_name='layouts/table_all.html'), name='bkk1'),## ใช้คู่กับบรรทัดล่าง Server Side for first display
+    path('bkk1s', Bkk1Views.Bkk1sJsonView.as_view(), name='Bkk1sJson'), # use in scripts ใช้คู่กับบรรทัดบน
+
 ]
