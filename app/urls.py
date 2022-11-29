@@ -75,5 +75,11 @@ urlpatterns = [
     path('skw3_filter', Skw3Views.Skw3Filter.as_view(), name='skw3_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side 
     path('skw3_filters', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
     path('skw3_filter_nor', Skw3Views.skw3_filter_nor, name="skw3_filter_nor"),  # ค้นหา Normal
- 
+     # Sever-Side skw301 (CRUD)
+    path('skw301', Skw3Views.MainViewSkw301.as_view(), name='skw301'),
+    path('skw301s', Skw3Views.Skw301sJsonView.as_view(), name='Skw103sJson'),
+    path('skw301_form', Skw3Views.skw301_form,name="skw301_form"),
+    path('skw301/<int:id>/', Skw3Views.skw301_form,name="skw301_update"),
+    path('delete/skw301/<int:id>/', Skw3Views.skw301_delete,name="skw301_delete"),
+
 ]

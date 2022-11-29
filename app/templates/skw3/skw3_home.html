@@ -1,4 +1,5 @@
 {% extends 'layouts/base_all.html' %}
+{% load humanize %}
 
 {% block title %} Skw3_Dashboard | {% endblock title %}
 {% block main_content %}
@@ -19,7 +20,7 @@
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
         <div class="info">
           <h4>ทั้งหมด</h4>
-          <p><b>{{ total_skw3|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ total_skw3|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>  
@@ -27,7 +28,7 @@
       <div class="widget-small info coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
         <div class="info">
           <h4>ซิ่นเต๋อ</h4>
-          <p><b>{{ total_skw301|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ total_skw301|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>    
@@ -38,7 +39,7 @@
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>3 วัน</h4>
-          <p><b>{{ cb3d_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cb3d_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>  
@@ -46,7 +47,7 @@
       <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>หมิงเต๋อ</h4>
-          <p><b>{{ cbM_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cbM_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>
@@ -54,7 +55,7 @@
       <div class="widget-small warning coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>ซินหมิน</h4>
-          <p><b>{{ cbS_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cbS_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>
@@ -62,7 +63,7 @@
       <div class="widget-small danger coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>จื่อซั่น</h4>
-          <p><b>{{ cbJ_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cbJ_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>
@@ -72,7 +73,7 @@
       <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>เจี่ยงเอวี๋ยน</h4>
-          <p><b>{{ cbJv_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cbJv_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>  
@@ -80,7 +81,7 @@
       <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
         <div class="info">
           <h4>เจี่ยงซือ</h4>
-          <p><b>{{ cbJc_count|floatformat:'g' }} ท่าน</b></p>
+          <p><b>{{ cbJc_count|intcomma }} ท่าน</b></p>
         </div>
       </div>    
     </div>
