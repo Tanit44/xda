@@ -92,3 +92,14 @@ class Bkk101Form(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
         self.fields['cRoom'].initial = 'หมิงซิน'
+
+class Bkk102Form(forms.ModelForm):
+    class Meta:
+        model = Bkk102
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(Bkk102Form,self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['cRoom'].initial = 'หมิงฮุย'
