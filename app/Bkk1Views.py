@@ -3,8 +3,8 @@ from django.contrib import messages
 from . models import *
 from . forms import *
 
-# from datetime import datetime
-# from lunarcalendar import Converter, Solar, Lunar, DateNotExist
+from datetime import datetime
+from lunarcalendar import Converter, Solar, Lunar, DateNotExist
 
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.views.generic import FormView
@@ -141,149 +141,149 @@ class Bkk1sJsonView(BaseDatatableView):
 #     }
 #     return render(request, 'bkk1/bkk1_filter_nor.html', context)
 
-# # Sever Side Save/Edit
-# # bkk1001  
-# class MainViewBkk101(FormView):
-#     template_name = 'layouts/zone_n.html'
-#     form_class = Bkk101Form
-#     def get_context_data(self, **kwargs):
-#         context = super(MainViewBkk101, self).get_context_data(**kwargs)
-#         context = {
-#             'header': 'หมิงซิน',
-#             'ocd': '24 พฤษภาคม 2562 เวลา 17.30 น.', ## เปิดฝอถัง
-#             'home': 'bkk1_home',
-#             'form': 'bkk101_form',
-#             'id_room': 'bkk101',
-#             's': 'bkk101s',
-#         }
-#         return context
+# Sever Side Save/Edit
+# bkk101  
+class MainViewBkk101(FormView):
+    template_name = 'layouts/zone_n.html'
+    form_class = Bkk101Form
+    def get_context_data(self, **kwargs):
+        context = super(MainViewBkk101, self).get_context_data(**kwargs)
+        context = {
+            'header': 'หมิงซิน',
+            'ocd': '24 พฤษภาคม 2562 เวลา 17.30 น.', ## เปิดฝอถัง
+            'home': 'bkk1_home',
+            'form': 'bkk101_form',
+            'id_room': 'bkk101',
+            's': 'bkk101s',
+        }
+        return context
 
-# class Bkk101sJsonView(BaseDatatableView):
-#     # model setting
-#     model = Bkk101
-#     # columns setting
-#     columns = ['id', 'nId_person', 'cFname', 'cGender', 'nAge', 'cPro', 'dDate', 'cRec', 'cSup', 'cAddress', 'cMtel', 'cHtel', 'cName']
+class Bkk101sJsonView(BaseDatatableView):
+    # model setting
+    model = Bkk101
+    # columns setting
+    columns = ['id', 'nId_person', 'cFname', 'cGender', 'nAge', 'cPro', 'dDate', 'cRec', 'cSup', 'cAddress', 'cMtel', 'cHtel', 'cName']
 
-#     # Specify search method: Partial match
-#     def get_filter_method(self):
-#         return super().FILTER_ICONTAINS
+    # Specify search method: Partial match
+    def get_filter_method(self):
+        return super().FILTER_ICONTAINS
 
-#     def filter_queryset(self, qs):
-#         search = self.request.GET.get('search[value]', None)
-#         if search:
-#             qs = qs.filter(
-#                 Q(cFname__istartswith=search) |
-#                 Q(nId_person__istartswith=search)
-#             )
-#         return qs
+    def filter_queryset(self, qs):
+        search = self.request.GET.get('search[value]', None)
+        if search:
+            qs = qs.filter(
+                Q(cFname__istartswith=search) |
+                Q(nId_person__istartswith=search)
+            )
+        return qs
 
-# def bkk101_form(request, id = 0):
-#     if request.method == "GET":
-#         if id == 0:
-#             last_id = Bkk101.objects.all().last()            
-#             allgender = Gender.objects.all() # gender for loop
-#             alllevel = Level.objects.all() # level for loop
-#             allpro = Pro.objects.all() # pro for loop
-#             alledu = Edu.objects.all() # edu for loop เรียงจาก หลัง ไป หน้า
-#             allcareer = Career.objects.all() # career for loop เรียงจาก หลัง ไป หน้า
+def bkk101_form(request, id = 0):
+    if request.method == "GET":
+        if id == 0:
+            last_id = Bkk101.objects.all().last()            
+            allgender = Gender.objects.all() # gender for loop
+            alllevel = Level.objects.all() # level for loop
+            allpro = Pro.objects.all() # pro for loop
+            alledu = Edu.objects.all() # edu for loop เรียงจาก หลัง ไป หน้า
+            allcareer = Career.objects.all() # career for loop เรียงจาก หลัง ไป หน้า
 
-#             next_nId_person = int(last_id.nId_person) + 1
-#             form = Bkk101Form()
-#             context = {
-#                 's_allgender' : allgender, # gender for loop
-#                 's_alllevel' : alllevel, # level for loop
-#                 's_allpro' : allpro, # pro for loop
-#                 's_alledu' : alledu, # edu for loop
-#                 's_allcareer' : allcareer, # career for loop
+            next_nId_person = int(last_id.nId_person) + 1
+            form = Bkk101Form()
+            context = {
+                's_allgender' : allgender, # gender for loop
+                's_alllevel' : alllevel, # level for loop
+                's_allpro' : allpro, # pro for loop
+                's_alledu' : alledu, # edu for loop
+                's_allcareer' : allcareer, # career for loop
 
-#                 'next_nId_person' : str(next_nId_person),
-#                 'header' : 'หมิงซิน',
-#                 'id_room' : 'bkk101',
-#                 'form': form,
-#             }
-#             return render(request, "layouts/zone_n_form.html", context)
-#         else:
-#             bkk101 = Bkk101.objects.get(id = id)            
-#             allgender = Gender.objects.all() # gender for loop
-#             alllevel = Level.objects.all() # level for loop
-#             allpro = Pro.objects.all() # pro for loop
-#             alledu = Edu.objects.all().order_by('-ename') # edu for loop เรียงจาก หลัง ไป หน้า
-#             allcareer = Career.objects.all().order_by('-cname') # career for loop เรียงจาก หลัง ไป หน้า
+                'next_nId_person' : str(next_nId_person),
+                'header' : 'หมิงซิน',
+                'id_room' : 'bkk101',
+                'form': form,
+            }
+            return render(request, "layouts/zone_n_form.html", context)
+        else:
+            bkk101 = Bkk101.objects.get(id = id)            
+            allgender = Gender.objects.all() # gender for loop
+            alllevel = Level.objects.all() # level for loop
+            allpro = Pro.objects.all() # pro for loop
+            alledu = Edu.objects.all().order_by('-ename') # edu for loop เรียงจาก หลัง ไป หน้า
+            allcareer = Career.objects.all().order_by('-cname') # career for loop เรียงจาก หลัง ไป หน้า
 
-#             s_Gender = bkk101.cGender # gender for selected
-#             s_Level = bkk101.cLevel # level for selected
-#             s_Pro = bkk101.cPro # pro for selected
-#             s_Edu = bkk101.cEdu # edu for selected
-#             s_Career = bkk101.cCareer # career for selected
-#             s_cbDd = bkk101.cbDd # cbDd for check-box
+            s_Gender = bkk101.cGender # gender for selected
+            s_Level = bkk101.cLevel # level for selected
+            s_Pro = bkk101.cPro # pro for selected
+            s_Edu = bkk101.cEdu # edu for selected
+            s_Career = bkk101.cCareer # career for selected
+            s_cbDd = bkk101.cbDd # cbDd for check-box
 
-#             # lunar calendar
-#             dDate = bkk101.dDate
-#             sdDate = str(dDate)
-#             sdDate_obj = datetime.strptime(sdDate, '%Y-%m-%d') 
-#             year = int(sdDate_obj.strftime('%Y'))
-#             month = int(sdDate_obj.strftime('%m'))
-#             dd = int(sdDate_obj.strftime('%d'))
-#             solar = Solar(year, month, dd)
-#             solar1 = solar.to_date()
-#             # print(solar1)
-#             # print(dDate)
-#             lunar = Converter.Solar2Lunar(solar)
-#             lunar1 = str(datetime(lunar.year, lunar.month, lunar.day))[:-9]
-#             ldDate_obj = datetime.strptime(lunar1, '%Y-%m-%d')
-#             lunar2 = ldDate_obj.strftime('%Y.%m.%d')
-#             # print(ldDate_obj.strftime('%Y.%m.%d'))
-#             # print(lunar2)
-#             bkk1001.cDate_dc = lunar2
-#             # print(d)
-#             form = Bkk101Form(instance = bkk1001)
+            # lunar calendar
+            dDate = bkk101.dDate
+            sdDate = str(dDate)
+            sdDate_obj = datetime.strptime(sdDate, '%Y-%m-%d') 
+            year = int(sdDate_obj.strftime('%Y'))
+            month = int(sdDate_obj.strftime('%m'))
+            dd = int(sdDate_obj.strftime('%d'))
+            solar = Solar(year, month, dd)
+            solar1 = solar.to_date()
+            # print(solar1)
+            # print(dDate)
+            lunar = Converter.Solar2Lunar(solar)
+            lunar1 = str(datetime(lunar.year, lunar.month, lunar.day))[:-9]
+            ldDate_obj = datetime.strptime(lunar1, '%Y-%m-%d')
+            lunar2 = ldDate_obj.strftime('%Y.%m.%d')
+            # print(ldDate_obj.strftime('%Y.%m.%d'))
+            # print(lunar2)
+            bkk101.cDate_dc = lunar2
+            # print(d)
+            form = Bkk101Form(instance = bkk101)
             
-#             context = {
-#                 's_allgender' : allgender, # gender for loop
-#                 's_alllevel' : alllevel, # level for loop
-#                 's_allpro' : allpro, # pro for loop
-#                 's_alledu' : alledu, # edu for loop
-#                 's_allcareer' : allcareer, # career for loop
+            context = {
+                's_allgender' : allgender, # gender for loop
+                's_alllevel' : alllevel, # level for loop
+                's_allpro' : allpro, # pro for loop
+                's_alledu' : alledu, # edu for loop
+                's_allcareer' : allcareer, # career for loop
 
-#                 's_Gender' : s_Gender, # gender for selected
-#                 's_Level' : s_Level, # level for selected
-#                 's_Pro' : s_Pro, # pro for selected
-#                 's_Edu' : s_Edu, # edu for selected
-#                 's_Career' : s_Career, # career for selected
-#                 's_cbDd' : s_cbDd, # cbDd for check-box
+                's_Gender' : s_Gender, # gender for selected
+                's_Level' : s_Level, # level for selected
+                's_Pro' : s_Pro, # pro for selected
+                's_Edu' : s_Edu, # edu for selected
+                's_Career' : s_Career, # career for selected
+                's_cbDd' : s_cbDd, # cbDd for check-box
 
-#                 'dDate' : dDate,
-#                 'lunar1' : str(lunar1), #'%Y-%m-%d'
-#                 'lunar2' : str(lunar2), #'%Y.%m.%d'
-#                 'header' : 'หมิงซิน',
-#                 'id_room' : 'bkk101',
-#                 'form': form,
-#             }
-#             return render(request, "layouts/zone_n_form.html", context)
-#     else:
-#         if id == 0:
-#             try:
-#                 user_exists = TableAll.objects.get(cFname=request.POST['cFname']) # For TableAll
-#                 # user_exists = Bkk1001.objects.get(cFname=request.POST['cFname']) # For Bkk1001
-#                 messages.error(request,"ผู้รับธรรมะท่านนี้ รับธรรมะแล้ว !!!")
-#                 return redirect('/bkk101_form')
+                'dDate' : dDate,
+                'lunar1' : str(lunar1), #'%Y-%m-%d'
+                'lunar2' : str(lunar2), #'%Y.%m.%d'
+                'header' : 'หมิงซิน',
+                'id_room' : 'bkk101',
+                'form': form,
+            }
+            return render(request, "layouts/zone_n_form.html", context)
+    else:
+        if id == 0:
+            try:
+                user_exists = TableAll.objects.get(cFname=request.POST['cFname']) # For TableAll
+                # user_exists = Bkk1001.objects.get(cFname=request.POST['cFname']) # For Bkk1001
+                messages.error(request,"ผู้รับธรรมะท่านนี้ รับธรรมะแล้ว !!!")
+                return redirect('/bkk101_form')
                 
-#             except TableAll.DoesNotExist: # For TableAll
-#                 form = Bkk101Form(request.POST)
-#                 form.save()
-#                 messages.success(request,"กด Close เพื่อปิด แล้ว กด Edit เพิ่มข้อมูลต่อไป")
-#                 # return redirect('/bkk1001_form')
-#                 return redirect('/bkk101')
-#         else:
-#             bkk101 = Bkk101.objects.get(id = id)
-#             form = Bkk101Form(request.POST,instance=bkk101)
-#             form.save()
-#             return redirect('/bkk101')
+            except TableAll.DoesNotExist: # For TableAll
+                form = Bkk101Form(request.POST)
+                form.save()
+                messages.success(request,"กด Close เพื่อปิด แล้ว กด Edit เพิ่มข้อมูลต่อไป")
+                # return redirect('/bkk1001_form')
+                return redirect('/bkk101')
+        else:
+            bkk101 = Bkk101.objects.get(id = id)
+            form = Bkk101Form(request.POST,instance=bkk101)
+            form.save()
+            return redirect('/bkk101')
 
-# def bkk101_delete(request, id):
-#     bkk101 = Bkk101.objects.get(id = id)
-#     bkk101.delete()
-#     return redirect('/bkk101')
+def bkk101_delete(request, id):
+    bkk101 = Bkk101.objects.get(id = id)
+    bkk101.delete()
+    return redirect('/bkk101')
 
 # # bkk1002  
 # class MainViewBkk102(FormView):

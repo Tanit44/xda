@@ -13,6 +13,7 @@ djangorestframework = "*"
 django-datatables-view = "*"
 django-thaidate = "*"
 django-ninja = "==0.16.1"
+lunarcalendar = "*"
 
 [dev-packages]
 

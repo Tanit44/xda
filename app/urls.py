@@ -43,5 +43,11 @@ urlpatterns = [
     path('bkk1_home', Bkk1Views.bkk1_home, name="bkk1_home"),
     path('bkk1', TemplateView.as_view(template_name='layouts/table_all.html'), name='bkk1'),## ใช้คู่กับบรรทัดล่าง Server Side for first display
     path('bkk1s', Bkk1Views.Bkk1sJsonView.as_view(), name='Bkk1sJson'), # use in scripts ใช้คู่กับบรรทัดบน
+    # Sever-Side bkk101 (CRUD)
+    path('bkk101', Bkk1Views.MainViewBkk101.as_view(), name='bkk101'),
+    path('bkk101s', Bkk1Views.Bkk101sJsonView.as_view(), name='Bkk101sJson'),
+    path('bkk101_form', Bkk1Views.bkk101_form,name="bkk101_form"),
+    path('bkk101/<int:id>/', Bkk1Views.bkk101_form,name="bkk101_update"),
+    path('delete/bkk101/<int:id>/', Bkk1Views.bkk101_delete,name="bkk101_delete"),
 
 ]
