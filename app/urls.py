@@ -72,5 +72,8 @@ urlpatterns = [
     path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
     path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw3'),
     path('skw3s', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJson'),
-
+    path('skw3_filter', Skw3Views.Skw3Filter.as_view(), name='skw3_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side 
+    path('skw3_filters', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
+    path('skw3_filter_nor', Skw3Views.skw3_filter_nor, name="skw3_filter_nor"),  # ค้นหา Normal
+ 
 ]

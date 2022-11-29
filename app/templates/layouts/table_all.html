@@ -39,7 +39,9 @@
         {% elif user.user_type == "Bkk1" %}
         <a class="btn btn-outline-secondary mr-2" href="{% url 'bkk1_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
         <a class="btn btn-outline-primary" href="{% url 'bkk1_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
-        <!-- wait skw -->
+        {% elif user.user_type == "Skw3" %}
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'skw3_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'skw3_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
         {% endif %}
       </li>
     </ul>

@@ -17,23 +17,23 @@ def skw3_home(request):
     total_skw301 = Skw301.objects.count()
     total_skw302 = Skw302.objects.count()
     total_skw303 = Skw303.objects.count()
-    # cb3d_count = Skw3.objects.filter(cb3d='True').count() # count cb3d for display
-    # cbM_count = Skw3.objects.filter(cbM='True').count() # count cb3M for display
-    # cbS_count = Skw3.objects.filter(cbS='True').count() # count cb3S for display
-    # cbJ_count = Skw3.objects.filter(cbJ='True').count() # count cb3J for display
-    # cbJv_count = Skw3.objects.filter(cbJv='True').count() # count cbJv for display
-    # cbJc_count = Skw3.objects.filter(cbJc='True').count() # count cbJc for display
+    cb3d_count = Skw3.objects.filter(cb3d='True').count() # count cb3d for display
+    cbM_count = Skw3.objects.filter(cbM='True').count() # count cb3M for display
+    cbS_count = Skw3.objects.filter(cbS='True').count() # count cb3S for display
+    cbJ_count = Skw3.objects.filter(cbJ='True').count() # count cb3J for display
+    cbJv_count = Skw3.objects.filter(cbJv='True').count() # count cbJv for display
+    cbJc_count = Skw3.objects.filter(cbJc='True').count() # count cbJc for display
     context = {
         'total_skw3': total_skw3,
         'total_skw301': total_skw301,
         'total_skw302': total_skw302,
         'total_skw303': total_skw303,
-        # 'cb3d_count' : cb3d_count, # count cb3d for display
-        # 'cbM_count' : cbM_count, # count cbM for display
-        # 'cbS_count' : cbS_count, # count cbS for display
-        # 'cbJ_count' : cbJ_count, # count cbJ for display
-        # 'cbJv_count' : cbJv_count, # count cbJv for display
-        # 'cbJc_count' : cbJc_count, # count cbJc for display
+        'cb3d_count' : cb3d_count, # count cb3d for display
+        'cbM_count' : cbM_count, # count cbM for display
+        'cbS_count' : cbS_count, # count cbS for display
+        'cbJ_count' : cbJ_count, # count cbJ for display
+        'cbJv_count' : cbJv_count, # count cbJv for display
+        'cbJc_count' : cbJc_count, # count cbJc for display
         }
     return render(request,"skw3/skw3_home.html", context)
 
@@ -54,85 +54,85 @@ class Skw3sJsonView(BaseDatatableView):
             )
         return qs  
 
-# class Skw3Filter(TemplateView):
-#     template_name = 'layouts/table_filter.html'# ใช้ table_filter.html ร่วมกับ กลุ่มต่างๆด้วยกัน
+class Skw3Filter(TemplateView):
+    template_name = 'layouts/table_filter.html'# ใช้ table_filter.html ร่วมกับ กลุ่มต่างๆด้วยกัน
 
-#     def get_context_data(self, **kwargs):
-#         context = super(Skw3Filter, self).get_context_data(**kwargs)
-#         context['sallgender'] = Gender.objects.all() # gender all for loop -> เพศ
-#         context['salllevel'] = Level.objects.all() # level all for loop -> ธรรมวุฒิ
-#         context['salledu'] = Edu.objects.all() # education all for loop -> การศึกษา
-#         context['sallpro'] = Pro.objects.all() # pro all for loop -> อ.ถ่ายทอดเบิกธรรม
-#         context['for'] = 'กลุ่ม อรัญประเทศ' # for header
-#         context['Pc'] = 'skw3' # for call back if close
-#         context['cb3d_count'] = Skw3.objects.filter(cb3d='True').count() # count cb3d for display
-#         context['cbM_count'] = Skw3.objects.filter(cbM='True').count() # count cb3M for display
-#         context['cbS_count'] = Skw3.objects.filter(cbS='True').count() # count cb3S for display
-#         context['cbJ_count'] = Skw3.objects.filter(cbJ='True').count() # count cb3J for display
-#         context['cbJv_count'] = Skw3.objects.filter(cbJv='True').count() # count cbJv for display
-#         context['cbJc_count'] = Skw3.objects.filter(cbJc='True').count() # count cbJc for display
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super(Skw3Filter, self).get_context_data(**kwargs)
+        context['sallgender'] = Gender.objects.all() # gender all for loop -> เพศ
+        context['salllevel'] = Level.objects.all() # level all for loop -> ธรรมวุฒิ
+        context['salledu'] = Edu.objects.all() # education all for loop -> การศึกษา
+        context['sallpro'] = Pro.objects.all() # pro all for loop -> อ.ถ่ายทอดเบิกธรรม
+        context['for'] = 'กลุ่ม อรัญประเทศ' # for header
+        context['Pc'] = 'skw3' # for call back if close
+        context['cb3d_count'] = Skw3.objects.filter(cb3d='True').count() # count cb3d for display
+        context['cbM_count'] = Skw3.objects.filter(cbM='True').count() # count cb3M for display
+        context['cbS_count'] = Skw3.objects.filter(cbS='True').count() # count cb3S for display
+        context['cbJ_count'] = Skw3.objects.filter(cbJ='True').count() # count cb3J for display
+        context['cbJv_count'] = Skw3.objects.filter(cbJv='True').count() # count cbJv for display
+        context['cbJc_count'] = Skw3.objects.filter(cbJc='True').count() # count cbJc for display
+        return context
 
-# # ใช้คู่กับ tableall_filter_nor ค้นหา บุตลากร สระแก้ว
-# def is_valid_queryparam(param):
-#     return param != '' and param is not None
-# # สำหรับ ค้นหา บุตลากร สระแก้ว 
-# def skw3_filter_nor(request): # get all object
-#     allgender = Gender.objects.all() # select gender all for loop เพศ
-#     alllevel = Level.objects.all() # select level all for loop ธรรมวุฒิ
-#     alledu = Edu.objects.all() # select edu all for loop การศึกษา
-#     allpro = Pro.objects.all() # select pro all for loop อ.ถ่ายทอดเบิกธรรม
+# ใช้คู่กับ tableall_filter_nor ค้นหา บุตลากร สระแก้ว
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+# สำหรับ ค้นหา บุตลากร สระแก้ว 
+def skw3_filter_nor(request): # get all object
+    allgender = Gender.objects.all() # select gender all for loop เพศ
+    alllevel = Level.objects.all() # select level all for loop ธรรมวุฒิ
+    alledu = Edu.objects.all() # select edu all for loop การศึกษา
+    allpro = Pro.objects.all() # select pro all for loop อ.ถ่ายทอดเบิกธรรม
 
-#     qs = Skw3.objects.all() # first run query set from Skw3
-#     gender_query = request.GET.get('gender') # get group 'เพศ' จากหน้า table_filter.html
-#     level_query = request.GET.get('level') # get title 'ธรรมวุฒิ' จากหน้า table_filter.html
-#     edu_query = request.GET.get('edu') # get description 'ธรรมกิจ' จากหน้า table_filter.html
-#     pro_query = request.GET.get('pro') # get item_all_or_course_all 'หัวข้อบรรยาย' จากหน้า table_filter.html
-#     pt_query = request.GET.get('pt') # get pt 'ปณืธาน' จากหน้า table_filter.html
-#     cb3d_query = request.GET.get('cb3d') # get pt '3 วัน' จากหน้า table_filter.html
-#     cbM_query = request.GET.get('cbM') # get pt 'หมิงเต๋อ' จากหน้า table_filter.html
-#     cbS_query = request.GET.get('cbS') # get pt 'ซินหมิน' จากหน้า table_filter.html
-#     cbJ_query = request.GET.get('cbJ') # get pt 'จื่อซั่น' จากหน้า table_filter.html
-#     cbJv_query = request.GET.get('cbJv') # get pt 'เจี่ยงเอวี๋ยน' จากหน้า table_filter.html
-#     cbJc_query = request.GET.get('cbJc') # get pt 'เจี่ยงซือ' จากหน้า table_filter.html
-#     # ***** filter after get data *****
-#     if is_valid_queryparam(gender_query) and gender_query != 'กรุณาเลือก...': # query set 'gender' เพศ
-#         qs =qs.filter(cGender=gender_query)
-#     if is_valid_queryparam(level_query) and level_query != 'กรุณาเลือก...': # query set 'level' ธรรมวุฒิ
-#         qs =qs.filter(cLevel=level_query)
-#     if is_valid_queryparam(edu_query) and edu_query != 'กรุณาเลือก...': # query set 'edu' การศึกษา
-#         qs =qs.filter(cEdu=edu_query)
-#     if is_valid_queryparam(pro_query) and pro_query != 'กรุณาเลือก...': # query set 'pro' อ.ถ่ายทอดเบิกธรรม
-#         qs =qs.filter(cPro=pro_query)
-#     if is_valid_queryparam(pt_query) and pt_query != 'กรุณาเลือก...': # query set 'pt' ปณืธาน
-#         qs =qs.filter(Q(cPt3=pt_query) # use OR (|) sign ปณืธาน ข้อที่ 3
-#             | Q(cPt4=pt_query) # ปณืธาน ข้อที่ 4
-#             | Q(cPt5=pt_query) # ปณืธาน ข้อที่ 5
-#             | Q(cPt6=pt_query) # ปณืธาน ข้อที่ 6
-#             ).distinct()
-#     if cb3d_query == 'on': # query set 'cb3d' true 3 วัน
-#         qs = qs.filter(cb3d=True)
-#     if cbM_query == 'on': # query set 'cbM' true หมิงเต๋อ
-#         qs = qs.filter(cbM=True)
-#     if cbS_query == 'on': # query set 'cbS' true ซินหมิน
-#         qs = qs.filter(cbS=True)
-#     if cbJ_query == 'on': # query set 'cbJ' true จื่อซั่น
-#         qs = qs.filter(cbJ=True)
-#     if cbJv_query == 'on': # query set 'cbJv' true เจี่ยงเอวี๋ยน
-#         qs = qs.filter(cbJv=True)
-#     if cbJc_query == 'on': # query set 'cbM' true เจี่ยงซือ
-#         qs = qs.filter(cbJc=True)
+    qs = Skw3.objects.all() # first run query set from Skw3
+    gender_query = request.GET.get('gender') # get group 'เพศ' จากหน้า table_filter.html
+    level_query = request.GET.get('level') # get title 'ธรรมวุฒิ' จากหน้า table_filter.html
+    edu_query = request.GET.get('edu') # get description 'ธรรมกิจ' จากหน้า table_filter.html
+    pro_query = request.GET.get('pro') # get item_all_or_course_all 'หัวข้อบรรยาย' จากหน้า table_filter.html
+    pt_query = request.GET.get('pt') # get pt 'ปณืธาน' จากหน้า table_filter.html
+    cb3d_query = request.GET.get('cb3d') # get pt '3 วัน' จากหน้า table_filter.html
+    cbM_query = request.GET.get('cbM') # get pt 'หมิงเต๋อ' จากหน้า table_filter.html
+    cbS_query = request.GET.get('cbS') # get pt 'ซินหมิน' จากหน้า table_filter.html
+    cbJ_query = request.GET.get('cbJ') # get pt 'จื่อซั่น' จากหน้า table_filter.html
+    cbJv_query = request.GET.get('cbJv') # get pt 'เจี่ยงเอวี๋ยน' จากหน้า table_filter.html
+    cbJc_query = request.GET.get('cbJc') # get pt 'เจี่ยงซือ' จากหน้า table_filter.html
+    # ***** filter after get data *****
+    if is_valid_queryparam(gender_query) and gender_query != 'กรุณาเลือก...': # query set 'gender' เพศ
+        qs =qs.filter(cGender=gender_query)
+    if is_valid_queryparam(level_query) and level_query != 'กรุณาเลือก...': # query set 'level' ธรรมวุฒิ
+        qs =qs.filter(cLevel=level_query)
+    if is_valid_queryparam(edu_query) and edu_query != 'กรุณาเลือก...': # query set 'edu' การศึกษา
+        qs =qs.filter(cEdu=edu_query)
+    if is_valid_queryparam(pro_query) and pro_query != 'กรุณาเลือก...': # query set 'pro' อ.ถ่ายทอดเบิกธรรม
+        qs =qs.filter(cPro=pro_query)
+    if is_valid_queryparam(pt_query) and pt_query != 'กรุณาเลือก...': # query set 'pt' ปณืธาน
+        qs =qs.filter(Q(cPt3=pt_query) # use OR (|) sign ปณืธาน ข้อที่ 3
+            | Q(cPt4=pt_query) # ปณืธาน ข้อที่ 4
+            | Q(cPt5=pt_query) # ปณืธาน ข้อที่ 5
+            | Q(cPt6=pt_query) # ปณืธาน ข้อที่ 6
+            ).distinct()
+    if cb3d_query == 'on': # query set 'cb3d' true 3 วัน
+        qs = qs.filter(cb3d=True)
+    if cbM_query == 'on': # query set 'cbM' true หมิงเต๋อ
+        qs = qs.filter(cbM=True)
+    if cbS_query == 'on': # query set 'cbS' true ซินหมิน
+        qs = qs.filter(cbS=True)
+    if cbJ_query == 'on': # query set 'cbJ' true จื่อซั่น
+        qs = qs.filter(cbJ=True)
+    if cbJv_query == 'on': # query set 'cbJv' true เจี่ยงเอวี๋ยน
+        qs = qs.filter(cbJv=True)
+    if cbJc_query == 'on': # query set 'cbM' true เจี่ยงซือ
+        qs = qs.filter(cbJc=True)
 
-#     context = {
-#         # for loop
-#         'sallgender':allgender, # sent 'sallgender' for loop เพศ
-#         'salllevel':alllevel, # sent 'salllevel' for loop เชาฉือ, ธรรมวุฒิ
-#         'salledu':alledu, # sent 'salledu' for loop การศึกษา
-#         'sallpro': allpro, # sent 'sallpro' for loop อ.ถ่ายทอดเบิกธรรม
-#         'queryset': qs, # sent 'queryset' for loop datatable       
+    context = {
+        # for loop
+        'sallgender':allgender, # sent 'sallgender' for loop เพศ
+        'salllevel':alllevel, # sent 'salllevel' for loop เชาฉือ, ธรรมวุฒิ
+        'salledu':alledu, # sent 'salledu' for loop การศึกษา
+        'sallpro': allpro, # sent 'sallpro' for loop อ.ถ่ายทอดเบิกธรรม
+        'queryset': qs, # sent 'queryset' for loop datatable       
 		
-#     }
-#     return render(request, 'skw3/skw3_filter_nor.html', context)
+    }
+    return render(request, 'skw3/skw3_filter_nor.html', context)
 
 # # Sever Side Save/Edit
 # # skw301  
