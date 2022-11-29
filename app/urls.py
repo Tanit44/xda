@@ -70,7 +70,7 @@ urlpatterns = [
     path('delete/bkk103/<int:id>/', Bkk1Views.bkk103_delete,name="bkk103_delete"),
     # Server-Side skw3 (view only)
     path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
-    path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw1'),
+    path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw3'),
     path('skw3s', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJson'),
 
 ]
