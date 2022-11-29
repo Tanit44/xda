@@ -47,6 +47,10 @@ urlpatterns = [
     path('bkk1_home', Bkk1Views.bkk1_home, name="bkk1_home"),
     path('bkk1', TemplateView.as_view(template_name='layouts/table_all.html'), name='bkk1'),## ใช้คู่กับบรรทัดล่าง Server Side for first display
     path('bkk1s', Bkk1Views.Bkk1sJsonView.as_view(), name='Bkk1sJson'), # use in scripts ใช้คู่กับบรรทัดบน
+    path('bkk1_filter', Bkk1Views.Bkk1Filter.as_view(), name='bkk1_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side for filter
+    path('bkk1_filters', Bkk1Views.Bkk1sJsonView.as_view(), name='Bkk1sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
+    path('bkk1_filter_nor', Bkk1Views.bkk1_filter_nor, name="bkk1_filter_nor"),  # ค้นหา Normal
+ 
     # Sever-Side bkk101 (CRUD)
     path('bkk101', Bkk1Views.MainViewBkk101.as_view(), name='bkk101'),
     path('bkk101s', Bkk1Views.Bkk101sJsonView.as_view(), name='Bkk101sJson'),
