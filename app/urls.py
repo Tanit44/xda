@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, AdminViews, Bkk1Views 
+from . import views, AdminViews, Bkk1Views, Skw3Views
 from django.views.generic.base import TemplateView
 
 from app.api import api
@@ -50,7 +50,6 @@ urlpatterns = [
     path('bkk1_filter', Bkk1Views.Bkk1Filter.as_view(), name='bkk1_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side for filter
     path('bkk1_filters', Bkk1Views.Bkk1sJsonView.as_view(), name='Bkk1sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
     path('bkk1_filter_nor', Bkk1Views.bkk1_filter_nor, name="bkk1_filter_nor"),  # ค้นหา Normal
- 
     # Sever-Side bkk101 (CRUD)
     path('bkk101', Bkk1Views.MainViewBkk101.as_view(), name='bkk101'),
     path('bkk101s', Bkk1Views.Bkk101sJsonView.as_view(), name='Bkk101sJson'),
@@ -69,5 +68,9 @@ urlpatterns = [
     path('bkk103_form', Bkk1Views.bkk103_form,name="bkk103_form"),
     path('bkk103/<int:id>/', Bkk1Views.bkk103_form,name="bkk103_update"),
     path('delete/bkk103/<int:id>/', Bkk1Views.bkk103_delete,name="bkk103_delete"),
+    # Server-Side skw3 (view only)
+    path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
+    path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw1'),
+    path('skw3s', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJson'),
 
 ]

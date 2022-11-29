@@ -12,10 +12,24 @@ def admin_home(request):
   total_all = TableAll.objects.count()
   total_bkk = Bkk.objects.count()
   total_skw = Skw.objects.count()
+  cb3d_count = TableAll.objects.filter(cb3d='True').count() # count cb3d for display
+  cbM_count = TableAll.objects.filter(cbM='True').count() # count cb3M for display
+  cbS_count = TableAll.objects.filter(cbS='True').count() # count cb3S for display
+  cbJ_count = TableAll.objects.filter(cbJ='True').count() # count cb3J for display
+  cbJv_count = TableAll.objects.filter(cbJv='True').count() # count cbJv for display
+  cbJc_count = TableAll.objects.filter(cbJc='True').count() # count cbJc for display
+
   context = {
     'total_all': total_all, #ทั้งหมด
     'total_bkk': total_bkk, #กทม
     'total_skw': total_skw, #สระแก้ว
+    'cb3d_count' : cb3d_count, # count cb3d for display
+    'cbM_count' : cbM_count, # count cbM for display
+    'cbS_count' : cbS_count, # count cbS for display
+    'cbJ_count' : cbJ_count, # count cbJ for display
+    'cbJv_count' : cbJv_count, # count cbJv for display
+    'cbJc_count' : cbJc_count, # count cbJc for display
+
   }
   return render(request,"admin/admin_home.html", context)
 

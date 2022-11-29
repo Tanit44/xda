@@ -1,0 +1,94 @@
+{% extends 'layouts/base_all.html' %}
+
+{% block title %} Skw3_Dashboard | {% endblock title %}
+{% block main_content %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> ระบบฐานข้อมูลกลาง</h1>
+      <p>สำหรับผู้บริหาร กลุ่ม อรัญประเทศ</p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">กลุ่ม อรัญประเทศ</a></li>
+    </ul>
+  </div>
+  <h3>จำนวน บุคลากร</h3>
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
+        <div class="info">
+          <h4>ทั้งหมด</h4>
+          <p><b>{{ total_skw3|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>  
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-id-card fa-3x"></i>
+        <div class="info">
+          <h4>ซิ่นเต๋อ</h4>
+          <p><b>{{ total_skw301|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>    
+  </div>
+  <h3>ชั้นศึกษา</h3>
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>3 วัน</h4>
+          <p><b>{{ cb3d_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>  
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>หมิงเต๋อ</h4>
+          <p><b>{{ cbM_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small warning coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>ซินหมิน</h4>
+          <p><b>{{ cbS_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small danger coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>จื่อซั่น</h4>
+          <p><b>{{ cbJ_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>เจี่ยงเอวี๋ยน</h4>
+          <p><b>{{ cbJv_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>  
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+        <div class="info">
+          <h4>เจี่ยงซือ</h4>
+          <p><b>{{ cbJc_count|floatformat:'g' }} ท่าน</b></p>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+</main>
+{% endblock main_content %}
+
+{% block custom_js %}
+
+{% endblock custom_js %}

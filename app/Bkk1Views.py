@@ -17,23 +17,23 @@ def bkk1_home(request):
     total_bkk101 = Bkk101.objects.count()
     total_bkk102 = Bkk102.objects.count()
     total_bkk103 = Bkk103.objects.count()
-    # cb3d_count = Bkk1.objects.filter(cb3d='True').count() # count cb3d for display
-    # cbM_count = Bkk1.objects.filter(cbM='True').count() # count cb3M for display
-    # cbS_count = Bkk1.objects.filter(cbS='True').count() # count cb3S for display
-    # cbJ_count = Bkk1.objects.filter(cbJ='True').count() # count cb3J for display
-    # cbJv_count = Bkk1.objects.filter(cbJv='True').count() # count cbJv for display
-    # cbJc_count = Bkk1.objects.filter(cbJc='True').count() # count cbJc for display
+    cb3d_count = Bkk1.objects.filter(cb3d='True').count() # count cb3d for display
+    cbM_count = Bkk1.objects.filter(cbM='True').count() # count cb3M for display
+    cbS_count = Bkk1.objects.filter(cbS='True').count() # count cb3S for display
+    cbJ_count = Bkk1.objects.filter(cbJ='True').count() # count cb3J for display
+    cbJv_count = Bkk1.objects.filter(cbJv='True').count() # count cbJv for display
+    cbJc_count = Bkk1.objects.filter(cbJc='True').count() # count cbJc for display
     context = {
         'total_bkk1': total_bkk1,
         'total_bkk101': total_bkk101,
         'total_bkk102': total_bkk102,
         'total_bkk103': total_bkk103,
-        # 'cb3d_count' : cb3d_count, # count cb3d for display
-        # 'cbM_count' : cbM_count, # count cbM for display
-        # 'cbS_count' : cbS_count, # count cbS for display
-        # 'cbJ_count' : cbJ_count, # count cbJ for display
-        # 'cbJv_count' : cbJv_count, # count cbJv for display
-        # 'cbJc_count' : cbJc_count, # count cbJc for display
+        'cb3d_count' : cb3d_count, # count cb3d for display
+        'cbM_count' : cbM_count, # count cbM for display
+        'cbS_count' : cbS_count, # count cbS for display
+        'cbJ_count' : cbJ_count, # count cbJ for display
+        'cbJv_count' : cbJv_count, # count cbJv for display
+        'cbJc_count' : cbJc_count, # count cbJc for display
         }
     return render(request,"bkk1/bkk1_home.html", context)
 
