@@ -39,6 +39,10 @@ urlpatterns = [
     path('print', AdminViews.PrintView.as_view(), name='print'),    
     path('tableall_form', AdminViews.tableall_form,name="tableall_form"),
     path('tableall/<int:id>', AdminViews.tableall_form,name="tableall_view"),  
+    path('table_filter', AdminViews.TableAllFilter.as_view(), name='table_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side for filter
+    path('table_filters', AdminViews.TableAllsJsonView.as_view(), name='TableAllsJson'), # use in scripts ใช้คู่กับบรรทัดบน
+    path('table_filter_nor', AdminViews.table_filter_nor, name="table_filter_nor"),  # ค้นหา Normal    
+
     # Server-Side bkk1 (view only)
     path('bkk1_home', Bkk1Views.bkk1_home, name="bkk1_home"),
     path('bkk1', TemplateView.as_view(template_name='layouts/table_all.html'), name='bkk1'),## ใช้คู่กับบรรทัดล่าง Server Side for first display

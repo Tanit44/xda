@@ -29,6 +29,25 @@
       {% endif %}   
     </div>
     <!-- table_filter -->
+    <ul class="app-breadcrumb breadcrumb">
+      <!-- <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li> -->
+      <!-- <li class="breadcrumb-item"><a href="{% url 'add_staff' %}">เพิ่มผู้ใช้งาน</a></li> -->
+      <li class="nav-item">
+        {% if user.user_type == "Admin" %} 
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'table_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'admin_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
+        {% elif user.user_type == "Bkk1" %}
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'bkk1_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'bkk1_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
+        {% elif user.user_type == "Skw1" %}
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'skw1_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'skw1_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
+        {% elif user.user_type == "Skw3" %}
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'skw3_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'skw3_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
+        {% endif %}
+      </li>
+    </ul>
   </div>
   <div class="container-fluid">
     <!-- <div class="row justify-content-center"> -->

@@ -1,0 +1,112 @@
+<script>
+function change() {
+  const gender = document.querySelectorAll(".gender input[type='checkbox']");
+  // const department = document.querySelectorAll(".department input[type='checkbox']");
+  // const experience = document.querySelectorAll(".experience input[type='checkbox']");
+  
+  const filters = {
+    genders: getClassOfCheckedCheckboxes(gender),
+    // departments: getClassOfCheckedCheckboxes(department),
+    // experiences: getClassOfCheckedCheckboxes(experience)
+  };
+
+  filterResults(filters);
+}
+
+function getClassOfCheckedCheckboxes(checkboxes) {
+  const classes = [];
+
+  if (checkboxes && checkboxes.length > 0) {
+    for (let i = 0; i < checkboxes.length; i++) {
+      const cb = checkboxes[i];
+
+      if (cb.checked) {
+        classes.push(cb.getAttribute("rel"));
+      }
+    }
+  }
+
+  return classes;
+}
+
+function filterResults(filters) {
+  const rElems = document.querySelectorAll(".result > div");
+  let hiddenElems = [];
+
+  if (!rElems || rElems.length <= 0) {
+    return;
+  }
+
+  for (let i = 0; i < rElems.length; i++) {
+    const el = rElems[i];
+
+
+    //filter repetations part for gender
+    if (filters.genders.length > 0) {
+      let isHidden = true;
+
+      for (let j = 0; j < filters.genders.length; j++) {
+        let filter = filters.genders[j];
+
+        if (el.classList.contains(filter)) {
+          isHidden = false;
+          break;
+        }
+      }
+
+      if (isHidden) {
+        hiddenElems.push(el);
+      }
+    }
+
+    // //repetation departments
+    // if (filters.departments.length > 0) {
+    //   let isHidden = true;
+
+    //   for (let j = 0; j < filters.departments.length; j++) {
+    //     let filter = filters.departments[j];
+
+    //     if (el.classList.contains(filter)) {
+    //       isHidden = false;
+    //       break;
+    //     }
+    //   }
+
+    //   if (isHidden) {
+    //     hiddenElems.push(el);
+    //   }
+    // }
+
+    // //repetation for experience
+    // if (filters.experiences.length > 0) {
+    //   let isHidden = true;
+
+    //   for (let j = 0; j < filters.experiences.length; j++) {
+    //     let filter = filters.experiences[j];
+
+    //     if (el.classList.contains(filter)) {
+    //       isHidden = false;
+    //       break;
+    //     }
+    //   }
+
+    //   if (isHidden) {
+    //     hiddenElems.push(el);
+    //   }
+    // }
+
+  }
+
+  for (let i = 0; i < rElems.length; i++) {
+    rElems[i].style.display = "block";
+  }
+
+  if (hiddenElems.length <= 0) {
+    return;
+  }
+
+  for (let i = 0; i < hiddenElems.length; i++) {
+    hiddenElems[i].style.display = "none";
+  }
+}
+</script>

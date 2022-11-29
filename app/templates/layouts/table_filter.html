@@ -1,0 +1,324 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load i18n thaidate %}
+
+{% block custom_css %}
+<!-- Main CSS-->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap4.min.css"> -->
+<!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- App css -->
+<!-- <link href="{% static 'assets/css/app.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- third party css -->
+<!-- <link href="{% static 'datatables/dataTables.bootstrap4.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- <link href="{% static 'datatables/responsive.bootstrap4.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- <link href="{% static 'datatables/buttons.bootstrap4.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- <link href="{% static 'datatables/select.bootstrap4.css' %}" rel="stylesheet" type="text/css" /> -->
+<!-- XDSoft DateTimePicker -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" /> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script> -->
+<style>
+    
+</style>
+{% endblock custom_css %}
+{% block main_content %}
+<main class="app-content">
+    <div class="app-title">
+        <div class="col-md-12">
+          <div class="float-right mt-1">
+              <a href="{{Pc}}"><i class="fa fa-close" style="font-size:18px"></i>
+              </a>                        
+          </div>
+          <h4><i class="fa fa-edit"></i> แบบฟอร์ม ค้นหาข้อมูล บุคลากร {{for}}
+          </h4>
+        </div>
+    </div>
+    
+    <!-- Navs-->
+    <div class="tile mb-4">
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="page-header">
+                <h2 class="mb-3 line-head" id="navs">ข้อมูล บุคลากร {{for}}</h2>
+            </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 2rem;">
+            <div class="col-lg-12">
+            {% if user.user_type == "Admin" %}
+            <form method="GET" action="table_filter_nor">
+            {% elif user.user_type == "Bkk1" %}
+            <form method="GET" action="bkk1_filter_nor">
+            {% elif user.user_type == "Skw1" %}
+            <form method="GET" action="skw1_filter_nor">
+            {% endif %}
+                    <div class="row">
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="tile">
+                                <div class="form-row">                  
+                                    <div class="form-group col-md-3">
+                                        <label>เพศ</label>
+                                        <select  class="form-control"  id="demoSelect" multiple="" name="gender">
+                                            <optgroup label="กรุณาเลือก...">
+                                            <!-- <option value="" selected>กรุณาเลือก...</option> -->
+                                            <!-- <option value="" hidden selected>กรุณาเลือก...</option> -->
+                                            {% for form in sallgender %}
+                                            <option value="{{ form.gname }}">{{ form.gname }}</option>
+                                            {% endfor %}
+                                            </optgroup>
+                                        </select>                                         
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>ธรรมวุฒิ</label>
+                                        <select  class="form-control"  id="demoSelect1" multiple="" name="level">
+                                            <optgroup label="กรุณาเลือก...">
+                                            <!-- <option value="" selected>กรุณาเลือก...</option> -->
+                                            <!-- <option value="" hidden selected>กรุณาเลือก...</option> -->
+                                            {% for form in salllevel %}
+                                            <option value="{{ form.lname }}">{{ form.lname }}</option>
+                                            {% endfor %}
+                                            </optgroup>
+                                        </select>                                         
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>การศึกษา</label>
+                                        <select  class="form-control" id="demoSelect2" multiple=""  name="edu">
+                                            <optgroup label="กรุณาเลือก...">
+                                            <!-- <option value="" selected>กรุณาเลือก...</option> -->
+                                            <!-- <option value="" hidden selected>กรุณาเลือก...</option> -->
+                                            {% for form in salledu %}
+                                            <option value="{{ form.ename }}">{{ form.ename }}</option>
+                                            {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>ปณิธาน</label>
+                                        <select  class="form-control"  id="demoSelect4" multiple="" name="pt">
+                                            <optgroup label="กรุณาเลือก...">
+                                            <option value="--------">--------</option>
+                                            <option value="3">ชิงโข่ว</option>
+                                            <option value="4">อุทิศตน</option>
+                                            <option value="5">ตั้งห้องพระ</option>
+                                            <option value="6">เผยแพร่</option>
+                                        </select>                                         
+                                    </div>
+                                </div>                                 
+                                <div class="form-row">
+                                    <!-- <div class="form-group col-md-3">
+                                        <label>ชั้นศึกษา</label>
+                                        <select  class="form-control"  id="demoSelect5" multiple="" name="sedu">
+                                            <optgroup label="กรุณาเลือก...">
+                                            <option value="--------">--------</option>
+                                            <option value="3 วัน">3 วัน</option>
+                                            <option value="หมิงเต๋อ">หมิงเต๋อ</option>
+                                            <option value="ซินหมิน">ซินหมิน</option>
+                                            <option value="จื่อซั่น">จื่อซั่น</option>
+                                            <option value="เจี่ยงเอวี๋ยน">เจี่ยงเอวี๋ยน</option>
+                                            <option value="เจี่ยงซือ">เจี่ยงซือ</option>
+                                            </optgroup>
+                                        </select>                                         
+                                    </div> -->
+                                    <div class="form-group col-md-12 mb-4">
+                                        <label>ชั้นศึกษา</label>
+                                        <div class="row">
+                                            <div class="form-check col-md-1 ml-3">
+                                                <input class="form-check-input" type="checkbox" id="cb3d" name="cb3d">
+                                                <label class="form-check-label" for="reviewed">3 วัน ({{ cb3d_count }})</label>
+                                            </div>
+                                            <div class="form-check col-md-1">
+                                                <input class="form-check-input" type="checkbox" id="cbM" name="cbM">
+                                                <label class="form-check-label" for="reviewed">หมิงเต๋อ ({{ cbM_count }})</label>
+                                            </div>
+                                            <div class="form-check col-md-1">
+                                                <input class="form-check-input" type="checkbox" id="cbS" name="cbS">
+                                                <label class="form-check-label" for="reviewed">ซินหมิน ({{ cbS_count }})</label>
+                                            </div>
+                                            <div class="form-check col-md-1">
+                                                <input class="form-check-input" type="checkbox" id="cbJ" name="cbJ">
+                                                <label class="form-check-label" for="reviewed">จื่อซั่น ({{ cbJ_count }})</label>
+                                            </div>
+                                            <div class="form-check col-md-1">
+                                                <input class="form-check-input" type="checkbox" id="cbJv" name="cbJv">
+                                                <label class="form-check-label" for="reviewed">เจี่ยงเอวี๋ยน ({{ cbJv_count }})</label>
+                                            </div>
+                                            <div class="form-check col-md-1">
+                                                <input class="form-check-input" type="checkbox" id="cbJc" name="cbJc">
+                                                <label class="form-check-label" for="reviewed">เจี่ยงซือ ({{ cbJc_count }})</label>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>                                 
+                                
+                                <!-- <div class="form-group">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                                    <label class="form-check-label" for="reviewed" style="color: rgb(255, 0, 0);">
+                                        เสียชีวิต
+                                    </label>
+                                    </div>
+                                </div> -->
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                                {% if user.user_type == "Admin" %}
+                                <a href="table_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
+                                {% elif user.user_type == "Bkk1" %}
+                                <a href="bkk1_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
+                                {% elif user.user_type == "Skw1" %}
+                                <a href="skw1_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
+                                {% endif %}
+                                <a href="{{Pc}}" class="btn btn-danger" style="float: right;"><i class="fa fa-times"></i> Close</a>                          
+                                <a href="{% url 'show_login' %}" class="btn btn-warning mr-2" style="float: right;"><i class="fa fa-sign-out fa-lg"></i> Logout</a>                          
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock main_content %}
+{% block custom_js %}
+<!-- Page specific javascripts-->
+<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/plugins/bootstrap-datepicker.min.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'js/plugins/select2.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/plugins/bootstrap-datepicker.min.js' %}"></script> -->
+<!-- <script type="text/javascript" src="{% static 'js/plugins/dropzone.js' %}"></script> -->
+<!-- third party js -->
+<script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables/dataTables.bootstrap4.js' %}"></script>
+<!-- <script src="assets/libsdataTables.responsive.min.js"></script> -->
+<!-- <script src="assets/libs/datatables/responsive.bootstrap4.min.js"></script> -->
+<!-- <script src="{% static 'datatables/dataTables.buttons.min.js' %}"></script> -->
+<!-- <script src="{% static 'datatables/buttons.bootstrap4.min.js' %}"></script> -->
+<!-- <script src="{% static 'datatables/buttons.html5.min.js' %}"></script> -->
+<!-- <script src="{% static 'datatables/buttons.flash.min.js' %}"></script> -->
+<!-- <script src="{% static 'datatables/buttons.print.min.js' %}"></script> -->
+<!-- <script src="{% static 'datatables/jszip.min.js' %}"></script> -->
+<!-- <script src="assets/libs/datatables/dataTables.keyTable.min.js"></script> -->
+<!-- <script src="assets/libs/datatables/dataTables.select.min.js"></script> -->
+<!-- <script src="{% static 'pdfmake/pdfmake.min.js' %}"></script> -->
+<!-- <script src="{% static 'pdfmake/vfs_fonts.js' %}"></script> -->
+<script type="text/javascript">
+    // for select
+    $('#demoSelect').select2({ width: '100%' });
+    $('#demoSelect1').select2({ width: '100%' });
+    $('#demoSelect2').select2({ width: '100%' });
+    $('#demoSelect3').select2({ width: '100%' });
+    $('#demoSelect4').select2({ width: '100%' });
+    $('#demoSelect5').select2({ width: '100%' });
+    // for datatable
+    $(document).ready(function () {
+    
+        // Selected record id
+        let selected = [];
+    
+        // DataTables settings
+        // https://datatables.net/reference/index
+        let table = $('#example').DataTable({
+    
+            // Server-side processing: Ajax mode setting
+            // https://datatables.net/examples/server_side/simple.html
+            processing: true,
+            serverSide: true,
+            {% if user.user_type == "Admin" %}
+            ajax: "./table_filters",
+            {% elif user.user_type == "Bkk1" %}
+            ajax: "./bkk1_filters",
+            {% elif user.user_type == "Skw1" %}
+            ajax: "./skw1s",
+            {% endif %}
+            // dom: Arrangement of various widgets such as search fields
+            // https://datatables.net/reference/option/dom
+            // dom: 'lfrtip',
+    
+            // lengthMenu: List of the number of items to be displayed on one page
+            // https://datatables.net/reference/option/lengthMenu
+            lengthMenu: [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+    
+            // pageLength: Initial value of pageLength
+            // https://datatables.net/reference/option/pageLength
+            pageLength: 5,    
+    
+            // rowCallback: Used when you want to perform additional processing when drawing a row
+            // https://datatables.net/reference/option/rowCallback
+    
+            // The display of the selected line is changed at the time of page transition
+            rowCallback: function (row, data) {
+                $(row).attr('data-id', data[0]);
+                if ($.inArray(data[0], selected) !== -1) {
+                    $(row).addClass('selected');
+                }
+            },
+    
+            columns: [
+                {
+                    // 1 column (id)
+                    title: "&nbsp;",
+                    searchable: false,
+                    visible: false,
+                    render: function () {
+                        return "";
+                    },
+                },
+                {
+                    // 2 column
+                    title: "รหัส",
+                },
+                {
+                    // 3 column
+                    title: "เพศ",
+                },
+                {
+                    // 4 column
+                    title: "ชื่อ-นามสกุล",
+                    render: function (data, type, row, full) {
+                          return '<a href=tableall/' + row[0] + '>' + data + '</a>';
+                      },
+                },
+                {
+                    // 5 column
+                    title: "อายุ",
+                },
+                {
+                    // 6 column
+                    title: "สถานธรรม",
+                    // google map
+                    // http://www.shurey.com/html/googlemaps.html
+                    // render: function (data, type, row) {
+                    //     return '<a target="_blank" href="https://maps.google.co.jp/maps?q=' + row[1] + data + '">' + data + '</a>';
+                    // },
+                },
+                {
+                    // 7 column
+                    title: "วันรับธรรมะ",
+                      render: function(data, type, full, meta){
+                        if(type == "display"){
+                                var date = new Date(data);
+                                var options = {year: "numeric", month: "long", day: "numeric"};
+                                return date.toLocaleDateString('th-TH', options); 
+                        }
+                        return data;
+                      }
+                },
+                {
+                    // 8 column
+                    title: "เตี่ยนฉวนซือ",
+                },
+                {
+                    // 9 column
+                    title: "อ.แนะนำ",
+                },                
+            ],
+        });
+    });
+  </script>   
+
+
+{% endblock custom_js %}
