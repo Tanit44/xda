@@ -55,5 +55,11 @@ urlpatterns = [
     path('bkk102_form', Bkk1Views.bkk102_form,name="bkk102_form"),
     path('bkk102/<int:id>/', Bkk1Views.bkk102_form,name="bkk102_update"),
     path('delete/bkk102/<int:id>/', Bkk1Views.bkk102_delete,name="bkk102_delete"),
+    # Sever-Side bkk103 (CRUD)
+    path('bkk103', Bkk1Views.MainViewBkk103.as_view(), name='bkk103'),
+    path('bkk103s', Bkk1Views.Bkk103sJsonView.as_view(), name='Bkk103sJson'),
+    path('bkk103_form', Bkk1Views.bkk103_form,name="bkk103_form"),
+    path('bkk103/<int:id>/', Bkk1Views.bkk103_form,name="bkk103_update"),
+    path('delete/bkk103/<int:id>/', Bkk1Views.bkk103_delete,name="bkk103_delete"),
 
 ]
