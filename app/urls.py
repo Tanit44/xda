@@ -74,12 +74,24 @@ urlpatterns = [
     path('skw1_filter', Skw1Views.Skw1Filter.as_view(), name='skw1_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side 
     path('skw1_filters', Skw1Views.Skw1sJsonView.as_view(), name='Skw1sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
     path('skw1_filter_nor', Skw1Views.skw1_filter_nor, name="skw1_filter_nor"),  # ค้นหา Normal
-     # Sever-Side skw101 (CRUD)
+     # Sever-Side skw101 (CRUD) ฝ่าเซิ่ง
     path('skw101', Skw1Views.MainViewSkw101.as_view(), name='skw101'),
     path('skw101s', Skw1Views.Skw101sJsonView.as_view(), name='Skw101sJson'),
     path('skw101_form', Skw1Views.skw101_form,name="skw101_form"),
     path('skw101/<int:id>/', Skw1Views.skw101_form,name="skw101_update"),
     path('delete/skw101/<int:id>/', Skw1Views.skw101_delete,name="skw101_delete"),
+     # Sever-Side skw102 (CRUD) ฉืออี
+    path('skw102', Skw1Views.MainViewSkw102.as_view(), name='skw102'),
+    path('skw102s', Skw1Views.Skw102sJsonView.as_view(), name='Skw102sJson'),
+    path('skw102_form', Skw1Views.skw102_form,name="skw102_form"),
+    path('skw102/<int:id>/', Skw1Views.skw102_form,name="skw102_update"),
+    path('delete/skw102/<int:id>/', Skw1Views.skw102_delete,name="skw102_delete"),
+     # Sever-Side skw103 (CRUD) ฉือจิ้ง
+    path('skw103', Skw1Views.MainViewSkw103.as_view(), name='skw103'),
+    path('skw103s', Skw1Views.Skw103sJsonView.as_view(), name='Skw103sJson'),
+    path('skw103_form', Skw1Views.skw103_form,name="skw103_form"),
+    path('skw103/<int:id>/', Skw1Views.skw103_form,name="skw103_update"),
+    path('delete/skw103/<int:id>/', Skw1Views.skw103_delete,name="skw103_delete"),
     # Server-Side skw3 (view only) กลุ่ม อรัญ ฯ
     path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
     path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw3'),

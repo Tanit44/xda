@@ -125,6 +125,28 @@ class Skw101Form(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
         self.fields['cRoom'].initial = 'ฝ่าเซิ่ง'
+# Skw102 ฉืออี
+class Skw102Form(forms.ModelForm):
+    class Meta:
+        model = Skw102
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(Skw102Form,self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['cRoom'].initial = 'ฉืออี'
+# Skw103 ฉือจิ้ง
+class Skw103Form(forms.ModelForm):
+    class Meta:
+        model = Skw103
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(Skw103Form,self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['cRoom'].initial = 'ฉือจิ้ง'
 # Skw301 ซิ่นเต๋อ
 class Skw301Form(forms.ModelForm):
     class Meta:
