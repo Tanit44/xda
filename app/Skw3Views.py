@@ -261,14 +261,14 @@ def skw301_form(request, id = 0):
                 user_exists = TableAll.objects.get(cFname=request.POST['cFname']) # For TableAll
                 # user_exists = Bkk1001.objects.get(cFname=request.POST['cFname']) # For Bkk1001
                 messages.error(request,"ผู้รับธรรมะท่านนี้ รับธรรมะแล้ว !!!")
-                return redirect('/skw101_form')
+                return redirect('/skw301_form')
                 
             except TableAll.DoesNotExist: # For TableAll
                 form = Skw301Form(request.POST)
                 form.save()
                 messages.success(request,"กด Close เพื่อปิด แล้ว กด Edit เพิ่มข้อมูลต่อไป")
                 # return redirect('/bkk1001_form')
-                return redirect('/skw101')
+                return redirect('/skw301')
         else:
             skw301 = Skw301.objects.get(id = id)
             form = Skw301Form(request.POST,instance=skw301)

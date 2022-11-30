@@ -134,148 +134,148 @@ def skw1_filter_nor(request): # get all object
     }
     return render(request, 'skw1/skw1_filter_nor.html', context)
 
-# # Sever Side Save/Edit
-# # skw301  
-# class MainViewSkw301(FormView):
-#     template_name = 'layouts/zone_n.html'
-#     form_class = Skw301Form
-#     def get_context_data(self, **kwargs):
-#         context = super(MainViewSkw301, self).get_context_data(**kwargs)
-#         context = {
-#             'header': 'ซิ่นเต๋อ',
-#             'ocd': '', ## เปิดฝอถัง
-#             'home': 'skw3_home',
-#             'form': 'skw301_form',
-#             'id_room': 'skw301',
-#             's': 'skw301s',
-#         }
-#         return context
+# Sever Side Save/Edit
+# skw101  
+class MainViewSkw101(FormView):
+    template_name = 'layouts/zone_n.html'
+    form_class = Skw101Form
+    def get_context_data(self, **kwargs):
+        context = super(MainViewSkw101, self).get_context_data(**kwargs)
+        context = {
+            'header': 'ฝ่าเซิ่ง',
+            'ocd': '', ## เปิดฝอถัง
+            'home': 'skw1_home',
+            'form': 'skw101_form',
+            'id_room': 'skw101',
+            's': 'skw101s',
+        }
+        return context
 
-# class Skw301sJsonView(BaseDatatableView):
-#     # model setting
-#     model = Skw301
-#     # columns setting
-#     columns = ['id', 'nId_person', 'cFname', 'cGender', 'nAge', 'cPro', 'dDate', 'cRec', 'cSup', 'cAddress', 'cMtel', 'cHtel', 'cName']
+class Skw101sJsonView(BaseDatatableView):
+    # model setting
+    model = Skw101
+    # columns setting
+    columns = ['id', 'nId_person', 'cFname', 'cGender', 'nAge', 'cPro', 'dDate', 'cRec', 'cSup', 'cAddress', 'cMtel', 'cHtel', 'cName']
 
-#     # Specify search method: Partial match
-#     def get_filter_method(self):
-#         return super().FILTER_ICONTAINS
+    # Specify search method: Partial match
+    def get_filter_method(self):
+        return super().FILTER_ICONTAINS
 
-#     def filter_queryset(self, qs):
-#         search = self.request.GET.get('search[value]', None)
-#         if search:
-#             qs = qs.filter(
-#                 Q(cFname__istartswith=search) |
-#                 Q(nId_person__istartswith=search)
-#             )
-#         return qs
+    def filter_queryset(self, qs):
+        search = self.request.GET.get('search[value]', None)
+        if search:
+            qs = qs.filter(
+                Q(cFname__istartswith=search) |
+                Q(nId_person__istartswith=search)
+            )
+        return qs
 
-# def skw301_form(request, id = 0):
-#     if request.method == "GET":
-#         if id == 0:
-#             last_id = Skw301.objects.all().last()            
-#             allgender = Gender.objects.all() # gender for loop
-#             alllevel = Level.objects.all() # level for loop
-#             allpro = Pro.objects.all() # pro for loop
-#             alledu = Edu.objects.all() # edu for loop
-#             allcareer = Career.objects.all() # career for loop
+def skw101_form(request, id = 0):
+    if request.method == "GET":
+        if id == 0:
+            last_id = Skw101.objects.all().last()            
+            allgender = Gender.objects.all() # gender for loop
+            alllevel = Level.objects.all() # level for loop
+            allpro = Pro.objects.all() # pro for loop
+            alledu = Edu.objects.all() # edu for loop
+            allcareer = Career.objects.all() # career for loop
 
-#             next_nId_person = int(last_id.nId_person) + 1
-#             form = Skw301Form()
-#             context = {
-#                 's_allgender' : allgender, # gender for loop
-#                 's_alllevel' : alllevel, # level for loop
-#                 's_allpro' : allpro, # pro for loop
-#                 's_alledu' : alledu, # edu for loop
-#                 's_allcareer' : allcareer, # career for loop
+            next_nId_person = int(last_id.nId_person) + 1
+            form = Skw101Form()
+            context = {
+                's_allgender' : allgender, # gender for loop
+                's_alllevel' : alllevel, # level for loop
+                's_allpro' : allpro, # pro for loop
+                's_alledu' : alledu, # edu for loop
+                's_allcareer' : allcareer, # career for loop
 
-#                 'next_nId_person' : str(next_nId_person),
-#                 'header' : 'ซิ่นเต๋อ',
-#                 'id_room' : 'skw301',
-#                 'form': form,
-#             }
-#             return render(request, "layouts/zone_n_form.html", context)
-#         else:
-#             skw301 = Skw301.objects.get(id = id)            
-#             allgender = Gender.objects.all() # gender for loop
-#             alllevel = Level.objects.all() # level for loop
-#             allpro = Pro.objects.all() # pro for loop
-#             # alledu = Edu.objects.all().order_by('-ename') # edu for loop เรียงจาก หลัง ไป หน้า
-#             # allcareer = Career.objects.all().order_by('-cname') # career for loop เรียงจาก หลัง ไป หน้า
-#             alledu = Edu.objects.all().order_by() # edu for loop
-#             allcareer = Career.objects.all().order_by() # career for loo
+                'next_nId_person' : str(next_nId_person),
+                'header' : 'ฝ่าเซิ่ง',
+                'id_room' : 'skw101',
+                'form': form,
+            }
+            return render(request, "layouts/zone_n_form.html", context)
+        else:
+            skw101 = Skw101.objects.get(id = id)            
+            allgender = Gender.objects.all() # gender for loop
+            alllevel = Level.objects.all() # level for loop
+            allpro = Pro.objects.all() # pro for loop
+            # alledu = Edu.objects.all().order_by('-ename') # edu for loop เรียงจาก หลัง ไป หน้า
+            # allcareer = Career.objects.all().order_by('-cname') # career for loop เรียงจาก หลัง ไป หน้า
+            alledu = Edu.objects.all().order_by() # edu for loop
+            allcareer = Career.objects.all().order_by() # career for loo
 
-#             s_Gender = skw301.cGender # gender for selected
-#             s_Level = skw301.cLevel # level for selected
-#             s_Pro = skw301.cPro # pro for selected
-#             s_Edu = skw301.cEdu # edu for selected
-#             s_Career = skw301.cCareer # career for selected
-#             s_cbDd = skw301.cbDd # cbDd for check-box
+            s_Gender = skw101.cGender # gender for selected
+            s_Level = skw101.cLevel # level for selected
+            s_Pro = skw101.cPro # pro for selected
+            s_Edu = skw101.cEdu # edu for selected
+            s_Career = skw101.cCareer # career for selected
+            s_cbDd = skw101.cbDd # cbDd for check-box
 
-#             # lunar calendar
-#             dDate = skw301.dDate
-#             sdDate = str(dDate)
-#             sdDate_obj = datetime.strptime(sdDate, '%Y-%m-%d') 
-#             year = int(sdDate_obj.strftime('%Y'))
-#             month = int(sdDate_obj.strftime('%m'))
-#             dd = int(sdDate_obj.strftime('%d'))
-#             solar = Solar(year, month, dd)
-#             solar1 = solar.to_date()
-#             # print(solar1)
-#             # print(dDate)
-#             lunar = Converter.Solar2Lunar(solar)
-#             lunar1 = str(datetime(lunar.year, lunar.month, lunar.day))[:-9]
-#             ldDate_obj = datetime.strptime(lunar1, '%Y-%m-%d')
-#             lunar2 = ldDate_obj.strftime('%Y.%m.%d')
-#             # print(ldDate_obj.strftime('%Y.%m.%d'))
-#             # print(lunar2)
-#             skw301.cDate_dc = lunar2
-#             # print(d)
-#             form = Skw301Form(instance = skw301)
+            # lunar calendar
+            dDate = skw101.dDate
+            sdDate = str(dDate)
+            sdDate_obj = datetime.strptime(sdDate, '%Y-%m-%d') 
+            year = int(sdDate_obj.strftime('%Y'))
+            month = int(sdDate_obj.strftime('%m'))
+            dd = int(sdDate_obj.strftime('%d'))
+            solar = Solar(year, month, dd)
+            solar1 = solar.to_date()
+            # print(solar1)
+            # print(dDate)
+            lunar = Converter.Solar2Lunar(solar)
+            lunar1 = str(datetime(lunar.year, lunar.month, lunar.day))[:-9]
+            ldDate_obj = datetime.strptime(lunar1, '%Y-%m-%d')
+            lunar2 = ldDate_obj.strftime('%Y.%m.%d')
+            # print(ldDate_obj.strftime('%Y.%m.%d'))
+            # print(lunar2)
+            skw301.cDate_dc = lunar2
+            # print(d)
+            form = Skw101Form(instance = skw101)
             
-#             context = {
-#                 's_allgender' : allgender, # gender for loop
-#                 's_alllevel' : alllevel, # level for loop
-#                 's_allpro' : allpro, # pro for loop
-#                 's_alledu' : alledu, # edu for loop
-#                 's_allcareer' : allcareer, # career for loop
+            context = {
+                's_allgender' : allgender, # gender for loop
+                's_alllevel' : alllevel, # level for loop
+                's_allpro' : allpro, # pro for loop
+                's_alledu' : alledu, # edu for loop
+                's_allcareer' : allcareer, # career for loop
 
-#                 's_Gender' : s_Gender, # gender for selected
-#                 's_Level' : s_Level, # level for selected
-#                 's_Pro' : s_Pro, # pro for selected
-#                 's_Edu' : s_Edu, # edu for selected
-#                 's_Career' : s_Career, # career for selected
-#                 's_cbDd' : s_cbDd, # cbDd for check-box
+                's_Gender' : s_Gender, # gender for selected
+                's_Level' : s_Level, # level for selected
+                's_Pro' : s_Pro, # pro for selected
+                's_Edu' : s_Edu, # edu for selected
+                's_Career' : s_Career, # career for selected
+                's_cbDd' : s_cbDd, # cbDd for check-box
 
-#                 'dDate' : dDate,
-#                 'lunar1' : str(lunar1), #'%Y-%m-%d'
-#                 'lunar2' : str(lunar2), #'%Y.%m.%d'
-#                 'header' : 'ซิ่นเต๋อ',
-#                 'id_room' : 'skw301',
-#                 'form': form,
-#             }
-#             return render(request, "layouts/zone_n_form.html", context)
-#     else:
-#         if id == 0:
-#             try:
-#                 user_exists = TableAll.objects.get(cFname=request.POST['cFname']) # For TableAll
-#                 # user_exists = Bkk1001.objects.get(cFname=request.POST['cFname']) # For Bkk1001
-#                 messages.error(request,"ผู้รับธรรมะท่านนี้ รับธรรมะแล้ว !!!")
-#                 return redirect('/skw101_form')
+                'dDate' : dDate,
+                'lunar1' : str(lunar1), #'%Y-%m-%d'
+                'lunar2' : str(lunar2), #'%Y.%m.%d'
+                'header' : 'ฝ่าเซิ่ง',
+                'id_room' : 'skw101',
+                'form': form,
+            }
+            return render(request, "layouts/zone_n_form.html", context)
+    else:
+        if id == 0:
+            try:
+                user_exists = TableAll.objects.get(cFname=request.POST['cFname']) # For TableAll
+                # user_exists = Bkk1001.objects.get(cFname=request.POST['cFname']) # For Bkk1001
+                messages.error(request,"ผู้รับธรรมะท่านนี้ รับธรรมะแล้ว !!!")
+                return redirect('/skw101_form')
                 
-#             except TableAll.DoesNotExist: # For TableAll
-#                 form = Skw301Form(request.POST)
-#                 form.save()
-#                 messages.success(request,"กด Close เพื่อปิด แล้ว กด Edit เพิ่มข้อมูลต่อไป")
-#                 # return redirect('/bkk1001_form')
-#                 return redirect('/skw101')
-#         else:
-#             skw301 = Skw301.objects.get(id = id)
-#             form = Skw301Form(request.POST,instance=skw301)
-#             form.save()
-#             return redirect('/skw301')
+            except TableAll.DoesNotExist: # For TableAll
+                form = Skw101Form(request.POST)
+                form.save()
+                messages.success(request,"กด Close เพื่อปิด แล้ว กด Edit เพิ่มข้อมูลต่อไป")
+                # return redirect('/bkk1001_form')
+                return redirect('/skw101')
+        else:
+            skw101 = Skw101.objects.get(id = id)
+            form = Skw101Form(request.POST,instance=skw101)
+            form.save()
+            return redirect('/skw101')
 
-# def skw301_delete(request, id):
-#     skw301 = Skw301.objects.get(id = id)
-#     skw301.delete()
-#     return redirect('/skw301')
+def skw101_delete(request, id):
+    skw101 = Skw101.objects.get(id = id)
+    skw101.delete()
+    return redirect('/skw101')

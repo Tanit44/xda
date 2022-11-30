@@ -74,6 +74,12 @@ urlpatterns = [
     path('skw1_filter', Skw1Views.Skw1Filter.as_view(), name='skw1_filter'), # ใช้คู่กับ บรรทัดล่าง Server Side 
     path('skw1_filters', Skw1Views.Skw1sJsonView.as_view(), name='Skw1sJsonView'), # use in scripts ใช้คู่กับบรรทัดบน
     path('skw1_filter_nor', Skw1Views.skw1_filter_nor, name="skw1_filter_nor"),  # ค้นหา Normal
+     # Sever-Side skw101 (CRUD)
+    path('skw101', Skw1Views.MainViewSkw101.as_view(), name='skw101'),
+    path('skw101s', Skw1Views.Skw101sJsonView.as_view(), name='Skw101sJson'),
+    path('skw101_form', Skw1Views.skw101_form,name="skw101_form"),
+    path('skw101/<int:id>/', Skw1Views.skw101_form,name="skw101_update"),
+    path('delete/skw101/<int:id>/', Skw1Views.skw101_delete,name="skw101_delete"),
     # Server-Side skw3 (view only) กลุ่ม อรัญ ฯ
     path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
     path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw3'),
