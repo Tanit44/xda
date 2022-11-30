@@ -6,6 +6,8 @@
     Admin_tableall |
   {% elif user.user_type == "Bkk1" %}
     กลุ่ม กทม |
+  {% elif user.user_type == "Skw1" %}
+    กลุ่ม กบินทร์บุรี |
   {% elif user.user_type == "Skw3" %}
     กลุ่ม อรัญประเทศ |
   {% endif %}
@@ -39,6 +41,9 @@
         {% elif user.user_type == "Bkk1" %}
         <a class="btn btn-outline-secondary mr-2" href="{% url 'bkk1_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
         <a class="btn btn-outline-primary" href="{% url 'bkk1_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
+        {% elif user.user_type == "Skw1" %}
+        <a class="btn btn-outline-secondary mr-2" href="{% url 'skw1_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
+        <a class="btn btn-outline-primary" href="{% url 'skw1_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>
         {% elif user.user_type == "Skw3" %}
         <a class="btn btn-outline-secondary mr-2" href="{% url 'skw3_filter' %}"><i class="fa fa-filter" style="font-size:24px"></i> Filter</a>
         <a class="btn btn-outline-primary" href="{% url 'skw3_home' %}"><i class="fa fa-home" style="font-size:24px"></i> Home</a>

@@ -48,6 +48,8 @@
             <form method="GET" action="table_filter_nor">
             {% elif user.user_type == "Bkk1" %}
             <form method="GET" action="bkk1_filter_nor">
+            {% elif user.user_type == "Skw1" %}
+            <form method="GET" action="skw1_filter_nor">
             {% elif user.user_type == "Skw3" %}
             <form method="GET" action="skw3_filter_nor">
             {% endif %}
@@ -163,6 +165,8 @@
                                 <a href="table_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
                                 {% elif user.user_type == "Bkk1" %}
                                 <a href="bkk1_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
+                                {% elif user.user_type == "Skw1" %}
+                                <a href="skw1_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
                                 {% elif user.user_type == "Skw3" %}
                                 <a href="skw3_filter"  type="button" class="btn btn-success ml-2"><i class="fa fa-history"></i> Reset</a>
                                 {% endif %}
@@ -231,6 +235,8 @@
             ajax: "./table_filters",
             {% elif user.user_type == "Bkk1" %}
             ajax: "./bkk1_filters",
+            {% elif user.user_type == "Skw1" %}
+            ajax: "./skw1_filters",
             {% elif user.user_type == "Skw3" %}
             ajax: "./skw3_filters",
             {% endif %}
