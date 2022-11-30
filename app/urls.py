@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, AdminViews, Bkk1Views, Skw3Views
+from . import views, AdminViews, Bkk1Views, Skw1Views, Skw3Views
 from django.views.generic.base import TemplateView
 
 from app.api import api
@@ -67,7 +67,11 @@ urlpatterns = [
     path('bkk103_form', Bkk1Views.bkk103_form,name="bkk103_form"),
     path('bkk103/<int:id>/', Bkk1Views.bkk103_form,name="bkk103_update"),
     path('delete/bkk103/<int:id>/', Bkk1Views.bkk103_delete,name="bkk103_delete"),
-    # Server-Side skw3 (view only)
+    # Server-Side skw1 (view only) กลุ่ม กบินทร์บุรี
+    path('skw1_home', Skw1Views.skw1_home, name="skw1_home"),
+    path('skw1', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw1'),
+    path('skw1s', Skw1Views.Skw1sJsonView.as_view(), name='Skw1sJson'),
+    # Server-Side skw3 (view only) กลุ่ม อรัญ ฯ
     path('skw3_home', Skw3Views.skw3_home, name="skw3_home"),
     path('skw3', TemplateView.as_view(template_name='layouts/table_all.html'), name='skw3'),
     path('skw3s', Skw3Views.Skw3sJsonView.as_view(), name='Skw3sJson'),
